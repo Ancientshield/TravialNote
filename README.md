@@ -1,9 +1,10 @@
-# README
+# TravialNote
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This TravialNote is 5xRuby demo project that show members learning programing design in three month last.
 
-Things you may want to cover:
+
+
+update early
 
 * Ruby version
 

@@ -1,4 +1,4 @@
-# TravialNote
+# GogoDiary
 
 This TravialNote is 5xRuby demo project that show members learning programing design in three month last.
 

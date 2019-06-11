@@ -1,0 +1,2 @@
+class PocketList < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class DiaryTag < ApplicationRecord
+end

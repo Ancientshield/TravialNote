@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  expect_date: 2019-06-11 15:08:03
+  location: 
+  user_id: 1
+
+two:
+  expect_date: 2019-06-11 15:08:03
+  location: 
+  user_id: 1

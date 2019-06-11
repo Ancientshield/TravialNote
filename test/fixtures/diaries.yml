@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  diary_date: 2019-06-11 15:08:38
+  user_id: 1
+  content: MyText
+  location: 
+  is_editing: false
+
+two:
+  diary_date: 2019-06-11 15:08:38
+  user_id: 1
+  content: MyText
+  location: 
+  is_editing: false

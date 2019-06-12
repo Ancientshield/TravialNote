@@ -1,4 +1,4 @@
 class DiaryTag < ApplicationRecord
-  has_many :diaries
-  has_many :diary_tags
+  belongs_to :diary
+  belongs_to :tag
 end

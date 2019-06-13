@@ -1,0 +1,22 @@
+<div class="wrap">
+
+  <%= render 'indexbar' %>
+
+  <div class="list">
+    <% @diaries.each do |diary| %>
+
+        <div class="item">
+          <div class="items pic"></div>
+          <div class="items date"><%= diary.diary_date %>20190612</div>
+          <div class="items content"><%= diary.content %>content</div>
+          <div class="items location"><%= diary.location %>location</div>
+        </div>
+
+    <% end %>
+  </div>
+
+  <%= render 'nav' %>
+
+</div>
+
+

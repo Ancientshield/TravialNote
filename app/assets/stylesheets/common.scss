@@ -5,6 +5,8 @@
   list-style: none;
   text-decoration: none;
 }
+
+@import 'vars';
 a{
   color: #000;
 }
@@ -16,10 +18,10 @@ a{
   border-bottom: 1px #eee solid;
 }
 .header, .nav{
-  max-width: 1010px;
+  width: 100%;
   margin: auto;
-  padding: 0 30px;
   height: 50px;
+  overflow: hidden;
   ul{
     display: flex;
     li{
@@ -27,7 +29,9 @@ a{
     }
   }
 }
-
+.headerbox{
+  background-color: #fff;
+}
 .header{
   ul{ 
     padding: 0 10px;
@@ -51,18 +55,24 @@ a{
 
   }
 }
-.nav{
+.navbox{
   position: sticky;
+  top: 0;
+  background-color: #fff;
+  opacity: .9;
+  z-index: 1;
+}
+.nav{
   ul{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     li a{
       display: block;
       color: #777;
-      font-size: 14px;
+      font-size: 10px;
       letter-spacing: 0.15em;
       font-family: Arial, Helvetica, sans-serif;
-      padding: 0 20px;
+      padding: 0 6px;
       text-transform: uppercase;
     }
   }
@@ -70,10 +80,22 @@ a{
 
 
 @media screen and (min-width:768px){
-  .header{
+  .header, .nav{
+    max-width: $page_width;
+    width: 100%;
+    margin: auto;
+    padding: 0 30px;
   }
-
-
+  .nav{
+    ul{
+      justify-content: flex-start;
+      li a{
+        font-size: 14px;
+        letter-spacing: 0.15em;
+        padding: 0 20px;
+      }
+    }
+  }
   .nav{
     ul li{
       a{

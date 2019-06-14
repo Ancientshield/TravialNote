@@ -1,21 +1,44 @@
 <div class="wrap">
 
 <%= render 'header' %>
+<%= render 'nav' %>
 <div class="container">
-  <div class="list">
-    <% @diaries.each do |diary| %>
 
-        <div class="item">
-          <div class="items pic"></div>
-          <div class="items date"><%= diary.diary_date %>20190612</div>
-          <div class="items content"><%= diary.content %>content</div>
-          <div class="items location"><%= diary.location %>location</div>
+  <div class="main">
+    <span class="year">2019</span>
+    <span class="month">6</span>
+
+    <a class="diary" href="#">
+      <div class="items">
+        <div class="date">
+          <span class="day">10</span>
+          <span class="week">一</span>
         </div>
 
-    <% end %>
+        <div class="info">
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta beatae consectetur, autem cupiditate similique numquam excepturi soluta iste repudiandae neque iure eos! Ipsam eius omnis numquam sit? Dolorum, expedita itaque?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta beatae consectetur, autem cupiditate similique numquam excepturi soluta iste repudiandae neque iure eos! Ipsam eius omnis numquam sit? Dolorum, expedita itaque?</p>
+          </div>
+          <div class="location">台北市中正區</div>
+        </div>
+
+        <div class="pic">
+          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+        </div>
+
+      </div>
+    </a>
   </div>
+
+  
+  <div class="sidebar">
+    <%= render 'sidepocket' %>
+    <%= render 'sidedraft' %>
+  </div>
+
 </div>
-<%= render 'nav' %>
+
 
 </div>
 

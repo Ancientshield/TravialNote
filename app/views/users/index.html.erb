@@ -1,7 +1,3 @@
-<h1>users</h1>
-
-<h1>地圖</h1>
-
 <style>
     /* Always set the map height explicitly to define the size of the div
            * element that contains the map. */
@@ -21,24 +17,28 @@
 </style>
 
 <head>
-    <!-- <script type="text/javascript" src="/jquery/jquery.js"></script> -->
     <script type="text/javascript">
         $(document).ready(function () {
             $(".btn1").click(function () {
-                $("div").fadeOut()
+                $("div#map").fadeOut()
             });
             $(".btn2").click(function () {
-                $("div").fadeIn();
+                $("div#map").fadeIn();
             });
         });
     </script>
 </head>
+<div class="wrap">
+    <%= render 'header' %>
+    <%= render 'nav' %>
 
-<body>
-    <button class="btn1">Hide</button>
-    <button class="btn2">Show</button>
-    <div id="map"></div>
-</body>
+    <body>
+        <button class="btn1">Hide</button>
+        <button class="btn2">Show</button>
+        <div id="map"></div>
+    </body>
+
+</div>
 <script>
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
@@ -92,5 +92,5 @@
     }
 </script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB1CGyW9xTr8fSM4Wn3h6eL7h4kRCtL-Q&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0&callback=initMap">
     </script>

@@ -29,8 +29,8 @@
     </script>
 </head>
 <div class="wrap">
-    <%= render 'header' %>
-    <%= render 'nav' %>
+    <%= render 'diaries/header' %>
+    <%= render 'diaries/nav' %>
 
     <body>
         <button class="btn1">Hide</button>
@@ -91,6 +91,5 @@
         infoWindow.open(map);
     }
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0&callback=initMap">
-    </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= Figaro.env.google_api_key %>&callback=initMap">
+</script>''

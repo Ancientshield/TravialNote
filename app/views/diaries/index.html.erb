@@ -8,7 +8,7 @@
   <% current_year = 0 %>
   <% current_month = 0 %>
   <% @diaries.each do |diary| %>
-    <% if not(current_year == diary.diary_date.year && current_month == diary.diary_date.month) %>
+    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
     <% current_year = diary.diary_date.year %>
     <% current_month = diary.diary_date.month %>
     <div>
@@ -49,5 +49,3 @@
 
 
 </div>
-
-

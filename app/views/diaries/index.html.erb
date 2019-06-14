@@ -1,7 +1,7 @@
 <div class="wrap">
 
-  <%= render 'indexbar' %>
-
+<%= render 'header' %>
+<div class="container">
   <div class="list">
     <% @diaries.each do |diary| %>
 
@@ -14,8 +14,8 @@
 
     <% end %>
   </div>
-
-  <%= render 'nav' %>
+</div>
+<%= render 'nav' %>
 
 </div>
 

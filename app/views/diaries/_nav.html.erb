@@ -1,9 +1,11 @@
-<nav class="nav">
-  <ul>
-    <li><%= link_to '首頁', root_path, class:'nav_btn' %></a></li>
-    <li><%= link_to '探索', '#', class:'nav_btn' %></a></li>
-    <li><%= link_to '日記', new_diary_path, class:'nav_btn' %></a></li>
-    <li><%= link_to '草稿', '#', class:'nav_btn' %></a></li>
-    <li><%= link_to '口袋', '#', class:'nav_btn' %></a></li>
-  </ul>
-</nav>
+<div class="navbox">
+  <nav class="nav show-in-pc">
+    <ul>
+      <li><%= link_to 'Explore', '#' %></li>
+      <li><%= link_to 'Pocket', '#' %></li>
+      <li><%= link_to 'Diary', new_diary_path %></li>
+      <li><%= link_to 'Draft', '#' %></li>
+      <li><%= link_to 'Setting', '#' %></li>
+    </ul>
+  </nav>
+</div>

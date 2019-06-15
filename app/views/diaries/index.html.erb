@@ -5,22 +5,29 @@
 <div class="container">
 
   <div class="main">
-    <span class="year">2019</span>
-    <span class="month">6</span>
-
+  <% current_year = 0 %>
+  <% current_month = 0 %>
+  <% @diaries.each do |diary| %>
+    <div>
+    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
+    <% current_year = diary.diary_date.year %>
+    <% current_month = diary.diary_date.month %>
+      <span class="year"><%= diary.diary_date.year %></span>
+      <span class="month"><%= diary.diary_date.month %></span>
+    <% end %>
+    </div>
     <a class="diary" href="#">
       <div class="items">
         <div class="date">
-          <span class="day">10</span>
-          <span class="week">一</span>
+          <span class="day"><%= diary.diary_date.day %></span>
+          <span class="week"><%= diary.week %></span>
         </div>
 
         <div class="info">
           <div class="content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta beatae consectetur, autem cupiditate similique numquam excepturi soluta iste repudiandae neque iure eos! Ipsam eius omnis numquam sit? Dolorum, expedita itaque?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta beatae consectetur, autem cupiditate similique numquam excepturi soluta iste repudiandae neque iure eos! Ipsam eius omnis numquam sit? Dolorum, expedita itaque?</p>
+            <%= simple_format(excerpt(diary.content,'',radius: 50)) %>
           </div>
-          <div class="location">台北市中正區</div>
+          <div class="location"><%= diary.location  %></div>
         </div>
 
         <div class="pic">
@@ -29,6 +36,7 @@
 
       </div>
     </a>
+  <% end %>
   </div>
 
   
@@ -41,5 +49,3 @@
 
 
 </div>
-
-

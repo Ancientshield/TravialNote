@@ -4,7 +4,7 @@
       <li class='logo'><%= link_to 'GoGoDiary', root_path %></li>
       <li class='search-bar'><%= link_to 'Search', '#' %></li>
       <li class='list'>
-        <%= link_to '#' do %>
+        <%= link_to root_path do %>
           <div>列表</div>
         <% end %>
       </li>
@@ -13,6 +13,14 @@
           <div>照片牆</div>
         <% end %>
       </li>
+      <% if user_signed_in? %>
+        <li><%= link_to 'SignOut', destroy_user_session_path, method:'delete' %></li>
+      <% end %>
+      <% if not user_signed_in? %>
+        <li><%= link_to 'SignIn', new_user_session_path %></li>
+        <li><%= link_to 'SignUp', new_user_registration_path%></li>
+      <% end %>
+      
     </ul>
   </div>
 </div>

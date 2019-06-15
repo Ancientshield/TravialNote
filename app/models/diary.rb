@@ -1,14 +1,10 @@
 class Diary < ApplicationRecord
-  # include ActionView::Helpers::SanitizeHelper
-  # include ActionView::Helpers::TagHelper
-  # include ActionView::Helpers::OutputSafetyHelper
+  default_scope { order('diary_date desc') }
   has_many :diary_tags
   has_many :tags, through: :diary_tags
   belongs_to :user
+  attr_accessor :is_published
 
-  def is_published?
-    is_published == true
-  end
 
   def week
     date = diary_date.days_to_week_start

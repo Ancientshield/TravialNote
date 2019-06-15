@@ -1,20 +1,23 @@
 class DiariesController < ApplicationController
 
   def index
-    @diaries = Diary.where(user_id: current_user)
+    @diaries = current_user.diaries
+
   end
 
   def show
   end
 
   def new
-    @diary = Diary.new()
+    @diary = current_user.diaries.new()
   end
 
   def create
-    @diary = Diary.new(diary_params)
-    @diary.user_id = current_user.id
-    
+    @diary = current_user.diaries.new(diary_params)
+    # @diary.is_published=true if params[:commit] == 'publish'
+    # @diary.is_published=false if params[:commit] == 'unpublish'
+    # binding.pry
+
     if @diary.save
       redirect_to root_path
     else

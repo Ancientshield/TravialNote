@@ -8,14 +8,14 @@
   <% current_year = 0 %>
   <% current_month = 0 %>
   <% @diaries.each do |diary| %>
+    <div>
     <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
     <% current_year = diary.diary_date.year %>
     <% current_month = diary.diary_date.month %>
-    <div>
       <span class="year"><%= diary.diary_date.year %></span>
       <span class="month"><%= diary.diary_date.month %></span>
-    </div>
     <% end %>
+    </div>
     <a class="diary" href="#">
       <div class="items">
         <div class="date">

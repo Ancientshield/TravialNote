@@ -6,8 +6,8 @@ class Diary < ApplicationRecord
   has_many :tags, through: :diary_tags
   belongs_to :user
 
-  def is_publish?
-    is_editing == false
+  def is_published?
+    is_published == true
   end
 
   def week

@@ -1,8 +1,7 @@
 class DiariesController < ApplicationController
 
   def index
-    # @diaries = Diary.where(user_id: current_user)
-      @diaries = Diary.where(diary_date: 20190615)
+    @diaries = Diary.where(user_id: current_user)
   end
 
   def show

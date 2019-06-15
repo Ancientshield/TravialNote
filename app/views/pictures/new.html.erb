@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'form', picture: @picture %>
+
+<p>
+  <strong>Cover:</strong>
+  <div>
+  <%= image_tag(@picture.cover, width: 200) if @picture.cover.attached? %>
+  </div>
+</p>
+
+<p>
+  <strong>Banners:</strong>
+  <div>
+    <% @picture.banners.each do |banner| %>
+      <%= image_tag banner %>
+    <% end %>
+  </div>
+</p>
+
+
+<%= link_to 'back', diaries_path %>
+

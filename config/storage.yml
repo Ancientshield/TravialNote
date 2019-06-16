@@ -18,12 +18,12 @@ google:
   service: GCS
   project: gogodiary
   credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
-  bucket: add_img
+  bucket: add_imgs
 google_dev:
   service: GCS
   project: gogodiary
-  credentials: <%= Rails.root.join("config/secrets/add_img.json") %>
-  bucket: add_img
+  credentials: <%= Rails.root.join("config/secrets/add_imgs.json") %>
+  bucket: add_imgs
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:

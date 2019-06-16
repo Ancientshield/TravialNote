@@ -24,12 +24,8 @@
   </div>
   
 
-    <%= form.submit do  %>
-      <div class="btn btn-lead">送出</div>
-    <% end %>
-    <%= form.submit do %>
-      <div class="btn btn-minor">稍後編輯</div>
-    <% end %>
+    <%= form.button :submit,'送出',value:'publish', name:'commit' , class:'btn btn-lead' %>
+    <%= form.button :submit, '稍後編輯',value:'unpublish', name:'commit',class:'btn btn-minor' %>
   <% end %>
   </section>
   <section class="btns">

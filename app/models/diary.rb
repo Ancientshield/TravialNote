@@ -3,8 +3,6 @@ class Diary < ApplicationRecord
   has_many :diary_tags
   has_many :tags, through: :diary_tags
   belongs_to :user
-  attr_accessor :is_published
-
 
   def week
     date = diary_date.days_to_week_start

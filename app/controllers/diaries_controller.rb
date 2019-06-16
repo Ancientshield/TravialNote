@@ -1,8 +1,7 @@
 class DiariesController < ApplicationController
 
   def index
-    @diaries = Diary.where(user_id:current_user)
-
+    @diaries = Diary.where(user_id: current_user)
   end
 
   def show
@@ -14,6 +13,7 @@ class DiariesController < ApplicationController
 
   def create
     @diary = Diary.new(diary_params)
+    @diary.user_id = current_user.id
     
     if @diary.save
       redirect_to root_path
@@ -33,8 +33,7 @@ class DiariesController < ApplicationController
 
   private
   def diary_params
-    params.require(:diary).permit(:content,:location,:diary_date,:cover)
-    
+    params.require(:diary).permit(:content,:location,:diary_date,:cover)    
   end
 
 end

@@ -1,10 +1,13 @@
 <div class="wrap">
+<%= render 'header' %>
+<%= render 'nav' %>
+<div class="container">
 <%= simple_form_for @diary do |form| %>
 
 
   <div><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
   
-  <div><%= form.input :diary_date, as: :date, html5: true,label: false %></div>
+  <div><%= form.input :diary_date, as: :date, html5: true,order: [:year,:month,:day],label: false %></div>
 
   <div>選擇地點</div>
 
@@ -15,4 +18,5 @@
 
 
 <% end %>
+</div>
 </div>

@@ -1,22 +1,51 @@
 <div class="wrap">
 
 <%= render 'header' %>
+<%= render 'nav' %>
 <div class="container">
-  <div class="list">
-    <% @diaries.each do |diary| %>
 
-        <div class="item">
-          <div class="items pic"></div>
-          <div class="items date"><%= diary.diary_date %>20190612</div>
-          <div class="items content"><%= diary.content %>content</div>
-          <div class="items location"><%= diary.location %>location</div>
+  <div class="main">
+  <% current_year = 0 %>
+  <% current_month = 0 %>
+  <% @diaries.each do |diary| %>
+    <div>
+    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
+    <% current_year = diary.diary_date.year %>
+    <% current_month = diary.diary_date.month %>
+      <span class="year"><%= diary.diary_date.year %></span>
+      <span class="month"><%= diary.diary_date.month %></span>
+    <% end %>
+    </div>
+    <a class="diary" href="#">
+      <div class="items">
+        <div class="date">
+          <span class="day"><%= diary.diary_date.day %></span>
+          <span class="week"><%= diary.week %></span>
         </div>
 
-    <% end %>
+        <div class="info">
+          <div class="content">
+            <%= simple_format(excerpt(diary.content,'',radius: 50)) %>
+          </div>
+          <div class="location"><%= diary.location  %></div>
+        </div>
+
+        <div class="pic">
+          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+        </div>
+
+      </div>
+    </a>
+  <% end %>
   </div>
-</div>
-<%= render 'nav' %>
+
+  
+  <div class="sidebar">
+    <%= render 'sidepocket' %>
+    <%= render 'sidedraft' %>
+  </div>
 
 </div>
 
 
+</div>

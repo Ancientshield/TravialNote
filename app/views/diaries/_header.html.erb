@@ -1,16 +1,26 @@
-<div class="header">
-  <ul>
-    <li class='logo'><%= link_to 'GoGoDiary', root_path %></li>
-    <li class='search-bar'><%= link_to 'Search', '#' %></li>
-    <li class='list'>
-      <%= link_to '#' do %>
-        <div>列表</div>
+<div class="headerbox">
+  <div class="header">
+    <ul>
+      <li class='logo'><%= link_to 'GoGoDiary', root_path %></li>
+      <li class='search-bar'><%= link_to 'Search', '#' %></li>
+      <li class='list'>
+        <%= link_to root_path do %>
+          <div>列表</div>
+        <% end %>
+      </li>
+      <li class='picwall'>
+        <%= link_to '#' do %>
+          <div>照片牆</div>
+        <% end %>
+      </li>
+      <% if user_signed_in? %>
+        <li><%= link_to 'SignOut', destroy_user_session_path, method:'delete' %></li>
       <% end %>
-    </li>
-    <li class='picwall'>
-      <%= link_to '#' do %>
-        <div>照片牆</div>
+      <% if not user_signed_in? %>
+        <li><%= link_to 'SignIn', new_user_session_path %></li>
+        <li><%= link_to 'SignUp', new_user_registration_path%></li>
       <% end %>
-    </li>
-  </ul>
+      
+    </ul>
+  </div>
 </div>

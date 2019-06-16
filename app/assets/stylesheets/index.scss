@@ -1,0 +1,98 @@
+.main{
+  >div{
+    margin-top: 30px;
+  }
+  .year{
+    margin-left: 1%;
+    color: #555;
+    &:after{
+      color: #555;
+      content: " 年";
+    }
+  }
+  .month{
+    color: #555;
+    &:after{
+      color: #555;
+      content: " 月";
+    }
+  }
+  
+  .day{
+    display: block;
+  }
+
+  .week{
+    &:before{
+      content: "星期";
+    }
+  }
+}
+.diary{
+  display: block;
+  margin-top: 10px;
+  transition: .3s;
+  &:hover .items{
+    transform: scale(1.01);
+    box-shadow: 0px 3px 1px #aaa;
+  }
+}
+.items{
+  color: #333;
+  width: 98%;
+  margin: auto;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 1px 1px #aaa;
+  align-items: center;
+  .date{
+    width: 20%;
+    text-align: center;
+  }
+  .day{
+    font-size: 28px;
+  }
+
+  .pic{
+    width: 25%;
+    overflow: hidden;
+    height: 100%;
+    img{
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+  }
+ 
+  .info{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    .content{
+      height: 70px;
+      line-height: 20px;
+      overflow: hidden;
+      padding: 12px 0;
+    }
+    .location{
+      line-height: 30px;
+      font-size: 8px;
+    }
+  }
+}
+
+@media screen and (min-width:768px){
+  .items{
+    width: 100%;
+    margin: auto;
+  }
+
+  .main .year{
+    margin-left: 0;
+  }
+  .location{
+    font-size: 10px;
+  }
+}

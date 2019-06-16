@@ -2,21 +2,39 @@
 <%= render 'header' %>
 <%= render 'nav' %>
 <div class="container">
-<%= simple_form_for @diary do |form| %>
 
+  <section class="main form">
+  <%= simple_form_for @diary do |form| %>
 
-  <div><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
+  <div class="form-pic"><%= link_to '新增旅遊圖片', new_picture_path %></div>
+
+  <div class="form-date"><%= form.input :diary_date, as: :date, html5: true,order: [:year,:month,:day],label: false %></div>
+
+  <div class="form-location">地點</div>
   
-  <div><%= form.input :diary_date, as: :date, html5: true,order: [:year,:month,:day],label: false %></div>
+  <div class="form-content"><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
+  
+  <div class="form-tag">
+  <span>Tags</span>
+    <div class="tag-used"></div>
+  <span>Add Tags</span>  
+    <div class="tag-option"></div>
+  <span>Create Tag</span>
+    <div class="tag-option"></div>
+  </div>
+  
 
-  <div>選擇地點</div>
+    <%= form.button :submit,'送出',value:'publish', name:'commit' , class:'btn btn-lead' %>
+    <%= form.button :submit, '稍後編輯',value:'unpublish', name:'commit',class:'btn btn-minor' %>
+  <% end %>
+  </section>
+  <section class="btns">
+  </section>
 
-  <div>標籤</div>
-  <div><%= link_to '新增旅遊圖片', new_picture_path %></div>
+  <section class="sidebar">
+    <%= render 'sidepocket' %>
+    <%= render 'sidedraft' %>
+  </section>
 
-  <%= form.submit '送出'%>
-
-
-<% end %>
 </div>
 </div>

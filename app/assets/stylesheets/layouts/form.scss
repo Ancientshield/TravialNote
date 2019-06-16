@@ -1,0 +1,23 @@
+.main.form{
+  padding: 20px 15px;
+}
+.form-content textarea{
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+  font-size: 12px;
+}
+
+
+@media screen and (min-width:415px){
+  .main.form{
+    padding: 0;
+  }
+  .form-content textarea{
+    width: 100%;
+    height: 400px;
+    padding: 20px;
+    font-size: 20px;
+  }
+  
+}

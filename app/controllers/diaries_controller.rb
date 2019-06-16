@@ -1,20 +1,22 @@
 class DiariesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    @diaries = Diary.where(user_id: current_user)
+    @diaries = current_user.diaries.where(is_published: true)
   end
 
   def show
   end
 
   def new
-    @diary = Diary.new()
+    @diary = current_user.diaries.new()
   end
 
   def create
-    @diary = Diary.new(diary_params)
-    @diary.user_id = current_user.id
-    
+    @diary = current_user.diaries.new(diary_params)
+    @diary.is_published=true if params[:commit] == 'publish'
+    @diary.is_published=false if params[:commit] == 'unpublish'
+
     if @diary.save
       redirect_to root_path
     else
@@ -34,7 +36,10 @@ class DiariesController < ApplicationController
   private
   def diary_params
     params.require(:diary).permit(:content,:location,:diary_date)
-
+  end
+  
+  def tag_params
+    
   end
 
 end

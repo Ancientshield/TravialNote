@@ -4,7 +4,7 @@
 <%= render 'nav' %>
 <div class="container">
 
-  <div class="main">
+  <section class="main">
   <% current_year = 0 %>
   <% current_month = 0 %>
   <% @diaries.each do |diary| %>
@@ -37,13 +37,13 @@
       </div>
     </a>
   <% end %>
-  </div>
+  </section>
 
   
-  <div class="sidebar">
+  <section class="sidebar">
     <%= render 'sidepocket' %>
     <%= render 'sidedraft' %>
-  </div>
+  </section>
 
 </div>
 

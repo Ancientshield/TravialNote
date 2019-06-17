@@ -1,0 +1,33 @@
+.tags{
+  padding: 0 10px;
+}
+.tag-item{
+  padding: 3px 12px;
+  background-color: #ddd;
+  border-radius: 6px;
+  position: relative;
+}
+.tag-item:before{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #ddd;
+  border-radius: 8px;
+  left: -12px;
+  top: -1px;
+}
+.tag-item:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fff;
+  left: 0px;
+  top: 11px;
+}

@@ -1,0 +1,39 @@
+<div class="wrap">
+
+<%= render 'layouts/header' %>
+<%= render 'layouts/nav' %>
+<div class="container">
+  <section class="main">
+    <section class="show-diary">
+      <div class="picture"><%=  %>picture</div>
+      <div class="location"><%=  %>location</div>
+      <div class="date">
+        <%= @diary.diary_date.year %>年
+        <%= @diary.diary_date.month %>月
+        <%= @diary.diary_date.day %>日
+        星期<%= @diary.week %>
+      </div>
+
+      <div class="content"><%= @diary.content %></div>
+      <div class="tag">
+        <span>tags22</span> 
+      </div>
+    </section>
+
+    <section class="btn-link">
+    <%= link_to '返回', root_path, class:'btn btn-secondary' %>
+    <%= link_to '刪除', diary_path, method:'delete', class:'btn btn-danger', data:{ confirm:'確定刪除？' } %>
+    <%= link_to '修改', edit_diary_path, class:'btn btn-primary' %>
+    </section>
+
+    
+  </section>
+
+  <section class="sidebar">
+    <%= render 'layouts/sidepocket' %>
+    <%= render 'layouts/sidedraft' %>
+  </section>
+</div>
+
+
+</div>

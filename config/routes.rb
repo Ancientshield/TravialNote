@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'diaries#index'
-  resources :pictures
   resources :diaries
+  resources :drafts
+  resources :pictures
   devise_for :users
   resources :users
   get "/ajax", to: "users#ajax"

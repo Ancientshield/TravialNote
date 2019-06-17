@@ -6,6 +6,7 @@ class DiariesController < ApplicationController
   end
 
   def show
+    @diary = current_user.diaries.find_by(id: params[:id])
   end
 
   def new
@@ -14,9 +15,8 @@ class DiariesController < ApplicationController
 
   def create
     @diary = current_user.diaries.new(diary_params)
-    @diary.is_published=true if params[:commit] == 'publish'
-    @diary.is_published=false if params[:commit] == 'unpublish'
-
+    @diary.is_published=true if params[:is_published] == 'true'
+    @diary.is_published=false if params[:is_published] == 'false'
     if @diary.save
       redirect_to root_path
     else
@@ -25,17 +25,32 @@ class DiariesController < ApplicationController
   end
   
   def edit
+    @diary = current_user.diaries.find_by(id: params[:id])
+    render :new
+
   end
 
   def update
+    @diary = current_user.diaries.find_by(id: params[:id])
+    @diary.is_published= true if params[:is_published] == 'true'
+    @diary.is_published= false if params[:is_published] == 'false'
+    if @diary.update(diary_params)
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def destroy
+    @diary = current_user.diaries.find_by(id: params[:id])
+    @diary.destroy if @diary
+    redirect_to root_path
   end
 
   private
   def diary_params
-    params.require(:diary).permit(:content,:location,:diary_date,:cover)
+    # params.require(:diary).permit(:content,:location,:diary_date,:cover)
+    params.require(:diary).permit(:content,:location,:diary_date)
   end
   
   def tag_params

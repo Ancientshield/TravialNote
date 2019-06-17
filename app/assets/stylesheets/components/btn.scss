@@ -1,0 +1,36 @@
+.btn-link{
+  margin: 20px 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.btn{
+  text-align: center;
+  border: 0;
+}
+.btn-danger{
+  padding: 6px 0;
+  font-size: 14px;
+  color: #f66;
+  margin-left: 0;
+  margin-right: auto;
+}
+.btn-secondary{
+  color: #777;
+  margin-left: auto;
+  margin-right: 20px;
+  box-shadow: 1px 1px 3px #777;
+}
+.btn-secondary:first-child{
+  margin-left: 0;
+}
+.btn-primary{
+  color: #333;
+  font-weight: 900;
+}
+.btn-primary, .btn-secondary{
+  font-size: 14px;
+  padding: 6px 10px;
+  box-shadow: 1px 1px 3px #333;
+  border-radius: 2px;
+}

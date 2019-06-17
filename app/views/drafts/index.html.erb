@@ -27,7 +27,7 @@
 
         <div class="info">
           <div class="content">
-            <%= simple_format(excerpt(diary.content,'',radius: 50)) %>
+            <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
           </div>
           <div class="location"><%= diary.location  %></div>
         </div>
@@ -46,6 +46,7 @@
   <section class="sidebar">
     <%= render 'layouts/sidepocket' %>
     <%= render 'layouts/sidedraft' %>
+    
   </section>
 
 </div>

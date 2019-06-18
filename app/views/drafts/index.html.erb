@@ -1,24 +1,23 @@
 <div class="wrap">
 
-<%= render 'layouts/header' %>
-<%= render 'layouts/nav' %>
-<div class="container">
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/nav' %>
+  <div class="container">
 
-  <section class="main">
-  <% current_year = 0 %>
-  <% current_month = 0 %>
-  <% @diaries.each do |diary| %>
-    <div>
-    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
-    <% current_year = diary.diary_date.year %>
-    <% current_month = diary.diary_date.month %>
-      <span class="year"><%= diary.diary_date.year %></span>
-      <span class="month"><%= diary.diary_date.month %></span>
-    <% end %>
-    </div>
+    <section class="main">
+      <% current_year = 0 %>
+      <% current_month = 0 %>
+      <% @diaries.each do |diary| %>
+      <div>
+        <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
+        <% current_year = diary.diary_date.year %>
+        <% current_month = diary.diary_date.month %>
+        <span class="year"><%= diary.diary_date.year %></span>
+        <span class="month"><%= diary.diary_date.month %></span>
+        <% end %>
+      </div>
 
-    <%= link_to diary_path(diary),class:'diary' do %>
-    
+      <%= link_to diary_path(diary),class:'diary' do %>
       <div class="items">
         <div class="date">
           <span class="day"><%= diary.diary_date.day %></span>
@@ -38,17 +37,13 @@
 
       </div>
 
-    <% end %>
-  <% end %>
-  </section>
+    </section>
+    <section class="sidebar">
+      <%= render 'layouts/sidepocket' %>
 
-  
-  <section class="sidebar">
-    <%= render 'layouts/sidepocket' %>
-    
-  </section>
+    </section>
 
-</div>
+  </div>
 
 
 </div>

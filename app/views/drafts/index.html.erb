@@ -1,0 +1,54 @@
+<div class="wrap">
+
+<%= render 'layouts/header' %>
+<%= render 'layouts/nav' %>
+<div class="container">
+
+  <section class="main">
+  <% current_year = 0 %>
+  <% current_month = 0 %>
+  <% @diaries.each do |diary| %>
+    <div>
+    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
+    <% current_year = diary.diary_date.year %>
+    <% current_month = diary.diary_date.month %>
+      <span class="year"><%= diary.diary_date.year %></span>
+      <span class="month"><%= diary.diary_date.month %></span>
+    <% end %>
+    </div>
+
+    <%= link_to diary_path(diary),class:'diary' do %>
+    
+      <div class="items">
+        <div class="date">
+          <span class="day"><%= diary.diary_date.day %></span>
+          <span class="week"><%= diary.week %></span>
+        </div>
+
+        <div class="info">
+          <div class="content">
+            <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
+          </div>
+          <div class="location"><%= diary.location  %></div>
+        </div>
+
+        <div class="pic">
+          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+        </div>
+
+      </div>
+
+    <% end %>
+  <% end %>
+  </section>
+
+  
+  <section class="sidebar">
+    <%= render 'layouts/sidepocket' %>
+    
+  </section>
+
+</div>
+
+
+</div>

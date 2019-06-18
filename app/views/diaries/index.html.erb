@@ -1,51 +1,52 @@
 <div class="wrap">
 
-<%= render 'header' %>
-<%= render 'nav' %>
-<div class="container">
+  <%= render 'header' %>
+  <%= render 'nav' %>
+  <div class="container">
 
-  <section class="main">
-  <% current_year = 0 %>
-  <% current_month = 0 %>
-  <% @diaries.each do |diary| %>
-    <div>
-    <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
-    <% current_year = diary.diary_date.year %>
-    <% current_month = diary.diary_date.month %>
-      <span class="year"><%= diary.diary_date.year %></span>
-      <span class="month"><%= diary.diary_date.month %></span>
-    <% end %>
-    </div>
-    <a class="diary" href="#">
-      <div class="items">
-        <div class="date">
-          <span class="day"><%= diary.diary_date.day %></span>
-          <span class="week"><%= diary.week %></span>
-        </div>
+    <section class="main">
+      <% current_year = 0 %>
+      <% current_month = 0 %>
+      <% @diaries.each do |diary| %>
+      <div>
 
-        <div class="info">
-          <div class="content">
-            <%= simple_format(excerpt(diary.content,'',radius: 50)) %>
-          </div>
-          <div class="location"><%= diary.location  %></div>
-        </div>
-
-        <div class="pic">
-          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
-        </div>
-
+        <% if current_year != diary.diary_date.year || current_month != diary.diary_date.month %>
+        <% current_year = diary.diary_date.year %>
+        <% current_month = diary.diary_date.month %>
+        <span class="year"><%= diary.diary_date.year %></span>
+        <span class="month"><%= diary.diary_date.month %></span>
+        <% end %>
       </div>
-    </a>
-  <% end %>
-  </section>
+      <a class="diary" href="#">
+        <div class="items">
+          <div class="date">
+            <span class="day"><%= diary.diary_date.day %></span>
+            <span class="week"><%= diary.week %></span>
+          </div>
 
-  
-  <section class="sidebar">
-    <%= render 'sidepocket' %>
-    <%= render 'sidedraft' %>
-  </section>
+          <div class="info">
+            <div class="content">
+              <%= simple_format(excerpt(diary.content,'',radius: 50)) %>
+            </div>
+            <div class="location"><%= diary.location  %></div>
+          </div>
 
-</div>
+          <div class="pic">
+            <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+          </div>
+
+        </div>
+      </a>
+      <% end %>
+    </section>
+
+
+    <section class="sidebar">
+      <%= render 'sidepocket' %>
+      <%= render 'sidedraft' %>
+    </section>
+
+  </div>
 
 
 </div>

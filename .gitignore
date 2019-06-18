@@ -32,4 +32,4 @@
 .DS_Store
 # Ignore application configuration
 /config/application.yml
-/config/secrets/add_imgs.json
+/config/secerts/add_imgs.json

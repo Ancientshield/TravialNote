@@ -17,6 +17,7 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.new(diary_params)
     @diary.is_published=true if params[:is_published] == 'true'
     @diary.is_published=false if params[:is_published] == 'false'
+
     if @diary.save
       redirect_to root_path
     else
@@ -53,8 +54,6 @@ class DiariesController < ApplicationController
     params.require(:diary).permit(:content,:location,:diary_date)
   end
   
-  def tag_params
-    
-  end
+
 
 end

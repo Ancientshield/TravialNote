@@ -8,29 +8,60 @@
 
       <div class="form-pic"><%= link_to '新增旅遊圖片', new_picture_path %></div>
 
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="form-date">
-        <%= form.input :diary_date, as: :date, html5: true,order: [:year,:month,:day],label: false %></div>
+      <%= form.input :diary_date, as: :date, html5: true,label: false %></div>
 
       <div class="form-location">地點</div>
+
+
+
+
+
+
+
+
+
+
+
 
       <div class="form-content"><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
 
       <div class="form-tag">
         <span>Tags</span>
-        <div class="tag-used"></div>
+        <div class="TagItems"></div>
         <span>Add Tags</span>
-        <div class="tag-option"></div>
+        <div class="NewTag"></div>
         <span>Create Tag</span>
-        <div class="tag-option"></div>
+        <div class="UserTags"></div>
       </div>
-
-
-      <%= form.button :submit,'送出',value:'publish', name:'commit' , class:'btn btn-lead' %>
-      <%= form.button :submit, '稍後編輯',value:'unpublish', name:'commit',class:'btn btn-minor' %>
+      <section class="btn-link">
+      <input type="hidden" id="is_published" name="is_published" value="false" />
+      <% if action_name == 'new'%>
+        <%= link_to '返回', root_path, class:'btn btn-secondary btn-linkto' %>
+        <%= form.button :submit, '稍後編輯', class:'btn btn-secondary js-submit', data: { is_published: false }  %>
+        <%= form.button :submit,'新增' , class:'btn btn-primary js-submit', data: { is_published: true } %>
+      <% elsif action_name == 'edit' %>
+        <%= link_to '返回', diary_path, class:'btn btn-secondary btn-linkto', data: { confirm: '日記正在編輯中，尚未儲存，是否放棄編輯？'} %>
+        <%= form.button :submit, '稍後編輯', class:'btn btn-secondary js-submit', data: { is_published: false }  %>
+        <%= form.button :submit,'確定修改' , class:'btn btn-primary js-submit', data: { is_published: true } %>
       <% end %>
+      </section>
     </section>
-    <section class="btns">
-    </section>
+
+    
+    <% end %>
 
     <section class="sidebar">
       <%= render 'layouts/sidepocket' %>
@@ -39,3 +70,12 @@
 
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('.js-submit').click(function(){
+    var $this = $(this);
+    $('#is_published').val($this.data('is-published'));
+  });
+});
+</script> 

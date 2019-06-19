@@ -5,10 +5,11 @@ class DraftsController < ApplicationController
     if current_user.diaries.where(is_published: false).any?
       @diaries = current_user.diaries.where(is_published: false)
     else
-      redirect_to root_path
+      redirect_to new_draft_path
     end
   end
 
-  def show
+  def new
+    
   end
 end

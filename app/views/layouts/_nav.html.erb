@@ -2,10 +2,10 @@
   <nav class="nav show-in-pc">
     <ul>
       <li><%= link_to 'Explore', users_path %></li>
-      <li><%= link_to 'Pocket', '#' %></li>
-      <li><%= link_to 'Diary', new_diary_path %></li>
-      <li><%= link_to 'Draft', drafts_path %></li>
-      <li><%= link_to 'Setting', '#' %></li>
+      <li><%= link_to 'Pockets', '#' %></li>
+      <li class="new_diary"><%= link_to 'Diary', new_diary_path, class:'new_diary' %></li>
+      <li><%= link_to 'Stories', root_path %></li>
+      <li><%= link_to 'Drafts', drafts_path %></li>
     </ul>
   </nav>
 </div>

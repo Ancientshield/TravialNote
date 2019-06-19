@@ -48,14 +48,14 @@
       </div>
       <section class="btn-link">
       <input type="hidden" id="is_published" name="is_published" value="false" />
-      <% if action_name == 'new'%>
-        <%= link_to '返回', root_path, class:'btn btn-secondary btn-linkto' %>
-        <%= form.button :submit, '稍後編輯', class:'btn btn-secondary js-submit', data: { is_published: false }  %>
-        <%= form.button :submit,'新增' , class:'btn btn-primary js-submit', data: { is_published: true } %>
-      <% elsif action_name == 'edit' %>
+      <% if action_name == 'edit' %>
         <%= link_to '返回', diary_path, class:'btn btn-secondary btn-linkto', data: { confirm: '日記正在編輯中，尚未儲存，是否放棄編輯？'} %>
         <%= form.button :submit, '稍後編輯', class:'btn btn-secondary js-submit', data: { is_published: false }  %>
         <%= form.button :submit,'確定修改' , class:'btn btn-primary js-submit', data: { is_published: true } %>
+      <% else %>
+        <%= link_to '返回', root_path, class:'btn btn-secondary btn-linkto' %>
+        <%= form.button :submit, '稍後編輯', class:'btn btn-secondary js-submit', data: { is_published: false }  %>
+        <%= form.button :submit,'新增' , class:'btn btn-primary js-submit', data: { is_published: true } %>
       <% end %>
       </section>
     </section>

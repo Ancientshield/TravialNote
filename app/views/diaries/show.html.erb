@@ -20,13 +20,14 @@
           <span class="tag-item"><%= tag.label %></span>
           <% end %>
         </div>
-      </section>
-
-      <section class="btn-link">
+         <section class="btn-link">
         <%= link_to '返回', root_path, class:'btn btn-secondary' %>
         <%= link_to '刪除', diary_path, method:'delete', class:'btn btn-danger', data:{ confirm:'確定刪除？' } %>
         <%= link_to '修改', edit_diary_path, class:'btn btn-primary' %>
       </section>
+      </section>
+
+     
 
     </section>
 

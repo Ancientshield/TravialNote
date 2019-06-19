@@ -5,14 +5,28 @@
         height: 100%;
         width: 600px;
         height: 400px;
+        border-radius: 2px;
+        box-shadow: 1px 1px 3px #333;
+
     }
 
-    /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+    .store-places {
+
+        height: 50px;
+        width: 175px;
+        border-radius: 20px;
+        box-shadow: 1px 1px 3px #333;
+        display: block;
+        text-align: center;
+        margin: 10px;
+        height: auto;
+        padding: 10px 0;
+
+    }
+
+    .store-places:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 1px 1px #aaa;
     }
 </style>
 
@@ -34,18 +48,19 @@
     <section class="main">
 
         <body>
-            <button class="btn1">Hide</button>
-            <button class="btn2">Show</button>
+            <!-- <button class="btn1">Hide</button> -->
+            <!-- <button class="btn2">Show</button> -->
             <div id="map"></div>
+            <div id="contury_area"></div>
         </body>
     </section>
     <section class="layouts/sidebar">
-        <ul id="places"></ul>
+        <div id="places"></div>
     </section>
 </div>
 
 <script>
-    var map, infoWindow;
+    var map, infoWindow, address, address_contury, address_area;
     function initMap() {
         let pyrmont = { lat: 25.04, lng: 121.51 };
         map = new google.maps.Map(document.getElementById('map'), {
@@ -54,22 +69,49 @@
         });
 
         let service = new google.maps.places.PlacesService(map);
+        infoWindow = new google.maps.InfoWindow;
+
         //#<!-- 自選座標 -->
         map.addListener('click', function (e) {
-            placeMarkerAndPanTo(e.latLng, map);
-            alert(e.latLng);
+            $('#places').empty();
+            //alert(e.latLng);
             let lat = e.latLng.lat();
             let lng = e.latLng.lng();
             pyrmont = { lat: lat, lng: lng };
             service.nearbySearch(
-                { location: pyrmont, radius: 500, type: ['store'] },
+                { location: pyrmont, radius: 300, type: ['store'] },
                 function (results, status, pagination) {
                     if (status !== 'OK') return;
                     createMarkers(results);
+                    //console.log(results);
                 });
             function createMarkers(places) {
                 var bounds = new google.maps.LatLngBounds();
                 var placesList = document.getElementById('places');
+                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        //縣市、區域、地址、座標
+                        //adress
+                        //$('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
+                        address = data.results[0].formatted_address;
+                        address_contury = data.results[0].address_components[3].long_name;
+                        address_area = data.results[0].address_components[2].long_name;
+                        console.log(address_contury);
+                        console.log(address_area);
+                        placeMarkerAndPanTo(e.latLng, map);
+                        //市+區
+                        //$('#contury_area').empty().append(`<div>${address_contury}</div><div>${address_area}</div>`);
+
+                        //alert(address);
+                    })
+                    .catch(function (error) {
+                        alert('some bad thing happend')
+                        alert(error)
+                    })
 
                 for (var i = 0, place; place = places[i]; i++) {
                     var image = {
@@ -87,28 +129,17 @@
                         position: place.geometry.location
                     });
 
-                    var li = document.createElement('li');
-                    li.textContent = place.name;
-                    placesList.appendChild(li);
+                    $('#places').append(`<button type="button" class="store-places">${place.name}</button>`);
+                    $('.store-places').animate({ width: "200px" }, 200);
+
+                    //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
+                    //ajax
+                    //$.get('<%= ajax_path %>', { lat: e.latLng.lat(), lng: e.latLng.lng() });
 
                     bounds.extend(place.geometry.location);
                 }
                 map.fitBounds(bounds);
             }
-            //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log(data);
-                    $('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
-                })
-                .catch(function (error) {
-                    alert('some bad thing happend')
-                    alert(error)
-                })
-            //$.get('<%= ajax_path %>', { lat: e.latLng.lat(), lng: e.latLng.lng() });
         });
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({
@@ -119,8 +150,6 @@
             map.panTo(latLng);
         }
         //#<!-- 結束 -->
-
-
     }
 
     function add_info(pos) {
@@ -129,8 +158,8 @@
         infoWindow.setOptions({
             pixelOffset: new google.maps.Size(0, -40)
         });
-        console.log(pos);
-        infoWindow.setContent(`我的經緯度：${pos.lat()}, ${pos.lng()}`);
+        //console.log(pos);
+        infoWindow.setContent(address);
         infoWindow.open(map);
         map.setCenter(pos);
     }

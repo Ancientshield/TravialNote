@@ -121,16 +121,13 @@
                     bounds.extend(place.geometry.location);
                 }
                 map.fitBounds(bounds);
-                //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
             }
         });
-
-        $(document).ready(function () {
-            $('#places').on('click', 'button', function (event) {
-                let selectpoint = $(this).text();
-                alert(`確定將『${selectpoint}』加入口袋清單？`);
-                //console.log(json);
-            });
+        //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
+        $('#places').on('click', 'button', function (event) {
+            let selectpoint = $(this).text();
+            alert(`確定將『${selectpoint}』加入口袋清單？`);
+            //console.log(json);
         });
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({

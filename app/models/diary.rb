@@ -1,6 +1,7 @@
 class Diary < ApplicationRecord
   default_scope { order('diary_date desc') }
   validates :diary_date, presence: true
+  has_one_attached :picture
   has_many :diary_tags
   has_many :tags, through: :diary_tags
   belongs_to :user

@@ -17,6 +17,7 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.new(diary_params)
     @diary.is_published=true if params[:is_published] == 'true'
     @diary.is_published=false if params[:is_published] == 'false'
+    # @picture = Picture.new(diary_params)
 
     if @diary.save
       redirect_to root_path
@@ -51,7 +52,7 @@ class DiariesController < ApplicationController
   private
   def diary_params
     # params.require(:diary).permit(:content,:location,:diary_date,:cover)
-    params.require(:diary).permit(:content,:location,:diary_date)
+    params.require(:diary).permit(:content,:location,:diary_date,:picture)
   end
   
 

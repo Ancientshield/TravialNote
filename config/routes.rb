@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :diaries
   resources :drafts
   resources :pictures
+  resources :pockets
   devise_for :users
   resources :users
   get "/ajax", to: "users#ajax"

@@ -30,36 +30,19 @@
     }
 </style>
 
-<head>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".btn1").click(function () {
-                $("div#map").fadeOut()
-            });
-            $(".btn2").click(function () {
-                $("div#map").fadeIn();
-            });
-        });
-    </script>
-</head>
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
     <section class="main">
-
-        <body>
-            <!-- <button class="btn1">Hide</button> -->
-            <!-- <button class="btn2">Show</button> -->
-            <div id="map"></div>
-            <div id="contury_area"></div>
-        </body>
+        <div id="map"></div>
+        <div id="contury_area"></div>
     </section>
     <section class="layouts/sidebar">
         <div id="places"></div>
     </section>
 </div>
 
-<script>
+<script type="text/javascript">
     var map, infoWindow, address, address_contury, address_area;
     function initMap() {
         let pyrmont = { lat: 25.04, lng: 121.51 };
@@ -93,15 +76,15 @@
                         return response.json();
                     })
                     .then(function (data) {
-                        console.log(data);
+                        //console.log(data);
                         //縣市、區域、地址、座標
                         //adress
                         //$('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
                         address = data.results[0].formatted_address;
-                        address_contury = data.results[0].address_components[3].long_name;
-                        address_area = data.results[0].address_components[2].long_name;
-                        console.log(address_contury);
-                        console.log(address_area);
+                        //address_contury = data.results[0].address_components[3].long_name;
+                        //address_area = data.results[0].address_components[2].long_name;
+                        //console.log(address_contury);
+                        //console.log(address_area);
                         placeMarkerAndPanTo(e.latLng, map);
                         //市+區
                         //$('#contury_area').empty().append(`<div>${address_contury}</div><div>${address_area}</div>`);
@@ -129,9 +112,8 @@
                         position: place.geometry.location
                     });
 
-                    $('#places').append(`<button type="button" class="store-places">${place.name}</button>`);
+                    $('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`);
                     $('.store-places').animate({ width: "200px" }, 200);
-
                     //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
                     //ajax
                     //$.get('<%= ajax_path %>', { lat: e.latLng.lat(), lng: e.latLng.lng() });
@@ -139,7 +121,16 @@
                     bounds.extend(place.geometry.location);
                 }
                 map.fitBounds(bounds);
+                //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
             }
+        });
+
+        $(document).ready(function () {
+            $('#places').on('click', 'button', function (event) {
+                let selectpoint = $(this).text();
+                alert(`確定將『${selectpoint}』加入口袋清單？`);
+                //console.log(json);
+            });
         });
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({
@@ -149,8 +140,10 @@
             add_info(latLng);
             map.panTo(latLng);
         }
+
         //#<!-- 結束 -->
     }
+
 
     function add_info(pos) {
         infoWindow = new google.maps.InfoWindow;

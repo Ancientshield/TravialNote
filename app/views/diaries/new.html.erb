@@ -2,21 +2,22 @@
   <%= render 'layouts/header' %>
   <%= render 'layouts/nav' %>
   <div class="container">
-
+  <!--<%= render 'pictures/form', picture: @picture %>-->
+    
     <section class="main form">
       <%= simple_form_for @diary do |form| %>
 
-      <div class="form-pic"><%= link_to '新增旅遊圖片', new_picture_path %></div>
+      <!--<div class="form-pic"><%= link_to '新增旅遊圖片', new_picture_path %>-->
+      <div class="form-pic">
+      
 
-
-
-
-
-
-
-
-
-
+        <%= form.file_field :picture, class: 'upl' %>
+        <div>
+          <img class="preview" style="max-width: 150px; max-height: 150px;">
+          <div class="size"></div>
+        </div>
+  
+      </div>
 
 
 

@@ -5,7 +5,7 @@
   <div class="container">
     <section class="main">
       <section class="show-diary">
-        <div class="picture"><%=  %>picture</div>
+        <div class="picture"><%= image_tag @diary.picture, width: 200 if @diary.picture.attached? %></div>
         <div class="location"><%=  %>location</div>
         <div class="date">
           <%= @diary.diary_date.year %>年

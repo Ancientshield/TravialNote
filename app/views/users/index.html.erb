@@ -71,6 +71,7 @@
             function createMarkers(places) {
                 var bounds = new google.maps.LatLngBounds();
                 var placesList = document.getElementById('places');
+                //console.log(placesList);
                 fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
                     .then(function (response) {
                         return response.json();
@@ -112,7 +113,8 @@
                         position: place.geometry.location
                     });
 
-                    $('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`);
+                    //$('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`); -->
+                    $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id }) + `>${place.name}</button>`);
                     $('.store-places').animate({ width: "200px" }, 200);
                     //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
                     //ajax
@@ -127,7 +129,9 @@
         $('#places').on('click', 'button', function (event) {
             let selectpoint = $(this).text();
             alert(`確定將『${selectpoint}』加入口袋清單？`);
-            //console.log(json);
+            let aaa = JSON.prase($(this).val());
+            //let aaa = JSON.parse($(this).val());
+            $.get('<%= ajax_path %>', { location: aaa });
         });
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({

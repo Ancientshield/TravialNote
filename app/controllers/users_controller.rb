@@ -10,6 +10,9 @@ class UsersController < ApplicationController
     @locations = Location.new(lat: params[:lat], lng: params[:lng])
     @locations.save!
 
+    @diaries = Diary.new(location: params[:location])
+    @diaries.save!
+
   end
 
 end

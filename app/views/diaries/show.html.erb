@@ -16,7 +16,7 @@
 
         <div class="content"><%= @diary.content %></div>
         <div class="tags">
-          <% @diary.tags.each do |tag| %>
+          <% @tags.each do |tag| %>
           <span class="tag-item"><%= tag.label %></span>
           <% end %>
         </div>

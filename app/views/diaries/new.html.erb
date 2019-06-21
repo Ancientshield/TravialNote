@@ -41,11 +41,25 @@
 
       <div class="form-tag">
         <span>Tags</span>
-        <div class="TagItems"></div>
+        <div class="TagItems">
+
+        <%= @tag %>
+
+
+        </div>
         <span>Add Tags</span>
         <div class="NewTag"></div>
-        <span>Create Tag</span>
-        <div class="UserTags"></div>
+        
+
+
+
+        <div class="tags UserTags">
+          <% @tag_items.each do |tag| %>
+          <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        </div>
+
+
       </div>
       <section class="btn-link">
       <input type="hidden" id="is_published" name="is_published" value="false" />

@@ -7,10 +7,16 @@ class DiariesController < ApplicationController
 
   def show
     @diary = current_user.diaries.find_by(id: params[:id])
+
+    @tags = @diary.tags
+
   end
 
   def new
     @diary = current_user.diaries.new()
+
+    @tag = Tag.new()
+    @tag_items = current_user.tags
   end
 
   def create

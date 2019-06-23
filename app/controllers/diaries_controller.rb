@@ -11,6 +11,8 @@ class DiariesController < ApplicationController
 
   def new
     @diary = current_user.diaries.new()
+    @diary.location = cookies[:location]
+
   end
 
   def create

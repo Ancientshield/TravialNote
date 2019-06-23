@@ -10,6 +10,10 @@
 
     }
 
+    .infocus {
+        background-color: #999;
+    }
+
     .store-places {
 
         height: 50px;
@@ -35,7 +39,10 @@
 <div class="container">
     <section class="main">
         <div id="map"></div>
-        <div id="contury_area"></div>
+        <div id="btn-link">
+            <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto', data: { confirm: '是否新增日記？'} %>
+            <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto', data: { confirm: '是否加入口袋？'} %>
+        </div>
     </section>
     <section class="layouts/sidebar">
         <div id="places"></div>
@@ -128,10 +135,21 @@
         //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
         $('#places').on('click', 'button', function (event) {
             let selectpoint = $(this).text();
-            alert(`確定將『${selectpoint}』加入口袋清單？`);
-            let aaa = JSON.prase($(this).val());
-            //let aaa = JSON.parse($(this).val());
-            $.get('<%= ajax_path %>', { location: aaa });
+            alert(`你選了『${selectpoint}』`);
+            $(this).addClass('infocus');
+            //e.preventDefult
+            let aaa = JSON.parse($(this).val());
+            //console.log('aaa')
+            //console.log('!')
+            //console.log(JSON.stringify(aaa))
+
+            document.cookie = 'location=' + JSON.stringify(aaa);
+
+            //$.get('<%= ajax_path %>', { location: aaa });
+            $.get('<%= new_diary_path %>', { location: aaa });
+
+
+
         });
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({

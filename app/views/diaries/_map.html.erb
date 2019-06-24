@@ -18,12 +18,12 @@
         padding-left: 10px;
     }
 </style>
-<div id="map"></div>
+<div id="map">
+</div>
 <script>
-    var lat = "<%= @diary.location %>";
-    console.log(lat);
-    var placeId = document.cookie;
-    console.log(lng);
+    var lat = parseFloat("<%= @diary.location['lat'] %>");
+    var lng = parseFloat("<%= @diary.location['lng'] %>");
+    var placeId = "<%= @diary.location['place_id'] %>";
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 14,
@@ -35,11 +35,10 @@
     }
 
     function geocodePlaceId(geocoder, map, infowindow) {
-        alert(placeId);
         geocoder.geocode({ 'placeId': placeId }, function (results, status) {
             if (status === 'OK') {
                 if (results[0]) {
-                    map.setZoom(11);
+                    map.setZoom(14);
                     map.setCenter(results[0].geometry.location);
                     var marker = new google.maps.Marker({
                         map: map,
@@ -48,7 +47,7 @@
                     infowindow.setContent(results[0].formatted_address);
                     infowindow.open(map, marker);
                 } else {
-                    window.alert('No results found');
+                    infowindow.setContent('No results found');
                 }
             } else {
                 window.alert('Geocoder failed due to: ' + status);

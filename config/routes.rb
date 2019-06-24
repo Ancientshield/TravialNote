@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'diaries#index'
-  resources :diaries
+  resources :diaries do
+    collection do
+      get :set_map_session, to: 'diaries#set_map_session'
+    end
+    resources :map_session, only: :create
+  end
   resources :drafts
   resources :pictures
   resources :pockets

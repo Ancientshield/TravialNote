@@ -25,8 +25,11 @@
         <%= form.input :diary_date, as: :date, html5: true,label: false %></div>
 
       <div class="form-location">
-        <%= @diary.location %>
+
+        <% if @diary.location.try(:[],"name") %>
+        <h1><%= @diary.location.try(:[],"name") %></h1>
         <%= render 'diaries/map' %>
+        <% end %>
       </div>
 
       <div class="form-content"><%= form.input :content, label: false, placeholder: '輸入內容' %></div>

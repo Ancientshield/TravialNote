@@ -3,7 +3,7 @@
     <ul>
       <li><%= link_to 'Explore', users_path %></li>
       <li><%= link_to 'Pockets', pockets_path %></li>
-      <li class="new_diary"><%= link_to 'Diary', new_diary_path, class:'new_diary' %></li>
+      <li class="new_diary"><%= link_to 'Diary', new_diary_path({delete_session: true}), class:'new_diary' %></li>
       <li><%= link_to 'Stories', root_path %></li>
       <li><%= link_to 'Drafts', drafts_path %></li>
     </ul>

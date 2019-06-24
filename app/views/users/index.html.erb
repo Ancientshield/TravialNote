@@ -40,8 +40,8 @@
     <section class="main">
         <div id="map"></div>
         <div id="btn-link">
-            <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto', data: { confirm: '是否新增日記？'} %>
-            <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto', data: { confirm: '是否加入口袋？'} %>
+            <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
+            <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto new_pocket' %>
         </div>
     </section>
     <section class="layouts/sidebar">
@@ -52,6 +52,7 @@
 <script type="text/javascript">
     var map, infoWindow, address, address_contury, address_area;
     function initMap() {
+        console.log('initMap')
         let pyrmont = { lat: 25.04, lng: 121.51 };
         map = new google.maps.Map(document.getElementById('map'), {
             center: pyrmont,
@@ -135,22 +136,21 @@
         //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
         $('#places').on('click', 'button', function (event) {
             let selectpoint = $(this).text();
-            alert(`你選了『${selectpoint}』`);
+            //alert(`你選了『${selectpoint}』`);
             $(this).addClass('infocus');
             //e.preventDefult
-            let aaa = JSON.parse($(this).val());
             //console.log('aaa')
             //console.log('!')
             //console.log(JSON.stringify(aaa))
 
-            document.cookie = 'location=' + JSON.stringify(aaa);
+            //document.cookie = 'location=' + JSON.stringify(aaa);
 
             //$.get('<%= ajax_path %>', { location: aaa });
-            $.get('<%= new_diary_path %>', { location: aaa });
 
-
-
+            //let aaa = JSON.parse($(this).val());
+            //$.get('<%= new_diary_path %>', { location: aaa });
         });
+
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({
                 position: latLng,
@@ -162,6 +162,18 @@
 
         //#<!-- 結束 -->
     }
+
+    $('.new_diary').on('click', function (event) {
+        var $this = $(this);
+        console.log('!!0');
+        let aaa = JSON.parse($('.infocus').val());
+        $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
+            var href = $this.attr('href');
+            if (href.length > 0)
+                location.href = href;
+        });
+        return false;
+    });
 
 
     function add_info(pos) {

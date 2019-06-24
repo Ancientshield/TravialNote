@@ -11,8 +11,6 @@ class UsersController < ApplicationController
 
     @diaries = Diary.new(location: diary_params[:location], diary_date: '2019-06-03 00:00:00')
     @diaries.user = current_user
-    #byebug
-    @diaries.save!
   end
 
   def diary_params

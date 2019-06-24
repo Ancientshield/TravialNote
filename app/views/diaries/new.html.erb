@@ -38,29 +38,12 @@
 
 
       <div class="form-content"><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
-
-      <div class="form-tag">
-        <span>Tags</span>
-        <div class="TagItems">
-
-        <%= @tag %>
-
-
-        </div>
-        <span>Add Tags</span>
-        <div class="NewTag"></div>
-        
-
-
-
-        <div class="tags UserTags">
-          <% @tag_items.each do |tag| %>
-          <span class="tag-item"><%= tag.label %></span>
-          <% end %>
+      
+        <div class="hidden_form">
         </div>
 
 
-      </div>
+
       <section class="btn-link">
       <input type="hidden" id="is_published" name="is_published" value="false" />
       <% if action_name == 'edit' %>
@@ -73,6 +56,34 @@
         <%= form.button :submit,'新增' , class:'btn btn-primary js-submit', data: { is_published: true } %>
       <% end %>
       </section>
+
+
+
+      <div class="form-tag">
+        <div class="tags TagItems">
+        <% unless @tag_items == [] %>
+          <% @tag_items.each do |tag| %>
+            <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        <% end %>
+        </div>
+
+        <div class="tags NewTag">
+          <input type="text" placeholder="輸入Tag" id="tagInput">
+          <input type="button" value="新增" id="tagBtn">
+        </div>
+
+
+
+        <div class="tags UserTags">
+          <% @user_tags.each do |tag| %>
+          <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        </div>
+      </div>
+
+
+
     </section>
 
     
@@ -88,9 +99,63 @@
 
 <script>
 $(document).ready(function(){
+  // setting submit value
   $('.js-submit').click(function(){
-    var $this = $(this);
-    $('#is_published').val($this.data('is-published'));
-  });
+    var $this = $(this)
+    $('#is_published').val($this.data('is-published'))
+  })
+
+
+  // init origin tags data
+  var originTags;
+  var originUserTags;
+
+  if ($('.TagItems .tag-item').length!=0){
+    originTags = $('.TagItems').get()[0].innerText.split(" ")
+    originTags.forEach(function(item){
+      createHiddenInput(item)
+    })
+  }
+
+  if ($('.UserTags .tag-item').length!=0){
+    originUserTags = $('.UserTags').get()[0].innerText.split(" ")
+  }
+
+  $('.TagItems').on('click','.tag-item',function(){
+    var $this = $(this)
+    var $tagObj = $this.context.innerHTML
+    var tagSpan = "<span class='tag-item'>" + $tagObj + "</span>"
+    $('.UserTags').append(tagSpan)
+    removeHiddenInput($tagObj)
+    $this.remove()
+  })
+
+  $('.UserTags').on('click','.tag-item',function(){
+    var $this = $(this)
+    var $tagObj = $this.context.innerHTML
+    var tagSpan = "<span class='tag-item'>"+ $tagObj +"</span>"
+    $('.TagItems').append(tagSpan)
+    createHiddenInput($tagObj)
+    $this.remove()
+  })
+
+  $('#tagBtn').on('click',function(){
+    var tagInput = $('#tagInput').val()
+    var tagSpan = "<span class='tag-item'>"+ tagInput +"</span>"
+    $('.TagItems').append(tagSpan)
+    createHiddenInput(tagInput)
+    $('#tagInput').val('')
+  })
+
+
+
+function createHiddenInput(item){
+  let HiddenInput = "<input type='hidden' name='label[]' value='"+ item +"'>"
+  $('.hidden_form').append(HiddenInput)
+}
+function removeHiddenInput(item){
+  var $removeInput = $(".hidden_form input[value='" + item + "']")
+  $removeInput.remove()
+}
 });
 </script> 

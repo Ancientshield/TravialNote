@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'diaries#index'
   resources :diaries
+  resource :tag
   resources :drafts
   resources :pictures
   devise_for :users

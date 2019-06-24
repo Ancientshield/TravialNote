@@ -84,15 +84,21 @@ RSpec.describe Tag, type: :model do
       tag.add_item '123'
       tag.add_item 'lalala'
       expect(tag.tag_items).to eq ['ccc','123','lalala']
-      expect(tag.tag_filter).to eq ['lalala']
+      expect(tag.new_tag_filter).to eq ['lalala']
       
       tag.add_item 'bababa'
-      expect(tag.tag_filter).to eq ['lalala','bababa']
+      expect(tag.new_tag_filter).to eq ['lalala','bababa']
       
       tag.remove_item 'lalala'
       tag.remove_item 'bababa'
-      expect(tag.tag_filter).to eq []
+      expect(tag.new_tag_filter).to eq []
     end
+
+    it 'DisplayItmes不會顯示已經出現在TagItems的Tag' do
+      tag.display_tags = tag.tag_filter
+      expect(tag.display_tags).to eq ['123']
+    end
+
 
   end
 

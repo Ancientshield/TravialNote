@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     end
     resources :map_session, only: :create
   end
+
+  resource :tag
   resources :drafts
   resources :pictures
   resources :pockets

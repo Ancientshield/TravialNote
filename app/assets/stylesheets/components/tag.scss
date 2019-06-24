@@ -6,6 +6,8 @@
   background-color: #ddd;
   border-radius: 6px;
   position: relative;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .tag-item:before{
   content: '';
@@ -31,3 +33,52 @@
   left: 0px;
   top: 11px;
 }
+
+
+.TagItems:before{
+  content:'標記在此篇日記的標籤: (點選可移除)';
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  height: 50px;
+}
+.TagItems:after{
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  margin-top: 20px;
+}
+
+.NewTag{
+  height: 50px;
+  margin-top: 20px;
+  &:before{
+    content: '';
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+  }
+}
+.UserTags{
+  width: 100%;
+  height: 200px;
+  &:before{
+    content: '快速加入您現有的標籤:';
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  .tag-item{
+    background-color: #eee;
+    color: #777;
+  }
+  .tag-item::before{
+    border-right: 14px solid #eee;
+  }
+  .tag-item:after{
+    background-color: #777;
+  }
+}
+

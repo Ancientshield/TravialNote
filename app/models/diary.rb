@@ -6,6 +6,7 @@ class Diary < ApplicationRecord
   has_many :tags, through: :diary_tags
   belongs_to :user
 
+
   def week
     date = diary_date.days_to_week_start
     case date

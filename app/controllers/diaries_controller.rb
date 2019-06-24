@@ -10,7 +10,16 @@ class DiariesController < ApplicationController
   end
 
   def new
+    # byebug
     @diary = current_user.diaries.new()
+    if params[:delete_session]
+      session.delete(:location)
+    end
+
+    if session[:location].present?
+      @diary.location = session[:location]
+      # session.delete(:location)
+    end
   end
 
   def create
@@ -25,7 +34,7 @@ class DiariesController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @diary = current_user.diaries.find_by(id: params[:id])
     render :new
@@ -47,6 +56,11 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.find_by(id: params[:id])
     @diary.destroy if @diary
     redirect_to root_path
+  end
+  
+  def set_map_session
+    location_params = params.permit(location: {})
+    session[:location] = location_params[:location]
   end
 
   private

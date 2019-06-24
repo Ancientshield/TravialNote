@@ -10,6 +10,10 @@
 
     }
 
+    .infocus {
+        background-color: #999;
+    }
+
     .store-places {
 
         height: 50px;
@@ -30,38 +34,25 @@
     }
 </style>
 
-<head>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".btn1").click(function () {
-                $("div#map").fadeOut()
-            });
-            $(".btn2").click(function () {
-                $("div#map").fadeIn();
-            });
-        });
-    </script>
-</head>
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
     <section class="main">
-
-        <body>
-            <!-- <button class="btn1">Hide</button> -->
-            <!-- <button class="btn2">Show</button> -->
-            <div id="map"></div>
-            <div id="contury_area"></div>
-        </body>
+        <div id="map"></div>
+        <div id="btn-link">
+            <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
+            <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto new_pocket' %>
+        </div>
     </section>
     <section class="layouts/sidebar">
         <div id="places"></div>
     </section>
 </div>
 
-<script>
+<script type="text/javascript">
     var map, infoWindow, address, address_contury, address_area;
     function initMap() {
+        console.log('initMap')
         let pyrmont = { lat: 25.04, lng: 121.51 };
         map = new google.maps.Map(document.getElementById('map'), {
             center: pyrmont,
@@ -88,20 +79,21 @@
             function createMarkers(places) {
                 var bounds = new google.maps.LatLngBounds();
                 var placesList = document.getElementById('places');
+                //console.log(placesList);
                 fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
                     .then(function (response) {
                         return response.json();
                     })
                     .then(function (data) {
-                        console.log(data);
+                        //console.log(data);
                         //縣市、區域、地址、座標
                         //adress
                         //$('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
                         address = data.results[0].formatted_address;
-                        address_contury = data.results[0].address_components[3].long_name;
-                        address_area = data.results[0].address_components[2].long_name;
-                        console.log(address_contury);
-                        console.log(address_area);
+                        //address_contury = data.results[0].address_components[3].long_name;
+                        //address_area = data.results[0].address_components[2].long_name;
+                        //console.log(address_contury);
+                        //console.log(address_area);
                         placeMarkerAndPanTo(e.latLng, map);
                         //市+區
                         //$('#contury_area').empty().append(`<div>${address_contury}</div><div>${address_area}</div>`);
@@ -129,9 +121,9 @@
                         position: place.geometry.location
                     });
 
-                    $('#places').append(`<button type="button" class="store-places">${place.name}</button>`);
+                    //$('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`); -->
+                    $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id }) + `>${place.name}</button>`);
                     $('.store-places').animate({ width: "200px" }, 200);
-
                     //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
                     //ajax
                     //$.get('<%= ajax_path %>', { lat: e.latLng.lat(), lng: e.latLng.lng() });
@@ -141,6 +133,24 @@
                 map.fitBounds(bounds);
             }
         });
+        //var json = { "name": place.name, "id": place_id, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() };
+        $('#places').on('click', 'button', function (event) {
+            let selectpoint = $(this).text();
+            //alert(`你選了『${selectpoint}』`);
+            $(this).addClass('infocus');
+            //e.preventDefult
+            //console.log('aaa')
+            //console.log('!')
+            //console.log(JSON.stringify(aaa))
+
+            //document.cookie = 'location=' + JSON.stringify(aaa);
+
+            //$.get('<%= ajax_path %>', { location: aaa });
+
+            //let aaa = JSON.parse($(this).val());
+            //$.get('<%= new_diary_path %>', { location: aaa });
+        });
+
         function placeMarkerAndPanTo(latLng, map) {
             var marker = new google.maps.Marker({
                 position: latLng,
@@ -149,8 +159,22 @@
             add_info(latLng);
             map.panTo(latLng);
         }
+
         //#<!-- 結束 -->
     }
+
+    $('.new_diary').on('click', function (event) {
+        var $this = $(this);
+        console.log('!!0');
+        let aaa = JSON.parse($('.infocus').val());
+        $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
+            var href = $this.attr('href');
+            if (href.length > 0)
+                location.href = href;
+        });
+        return false;
+    });
+
 
     function add_info(pos) {
         infoWindow = new google.maps.InfoWindow;

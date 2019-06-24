@@ -18,25 +18,25 @@
         <% end %>
       </div>
       <%= link_to diary_path(diary),class:'diary' do %>
-        <div class="items">
-          <div class="date">
-            <span class="day"><%= diary.diary_date.day %></span>
-            <span class="week"><%= diary.week %></span>
-          </div>
-
-          <div class="info">
-            <div class="content">
-              <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
-            </div>
-            <div class="location"><%= diary.location  %></div>
-          </div>
-
-          <div class="pic">
-            <%= image_tag diary.picture if diary.picture.attached? %>
-            <img src="https://picsum.photos/200/300/?random" alt="diary picture">
-          </div>
-
+      <div class="items">
+        <div class="date">
+          <span class="day"><%= diary.diary_date.day %></span>
+          <span class="week"><%= diary.week %></span>
         </div>
+
+        <div class="info">
+          <div class="content">
+            <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
+          </div>
+          <div class="location"><%= diary.location %></div>
+        </div>
+
+        <div class="pic">
+          <%= image_tag diary.picture if diary.picture.attached? %>
+          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+        </div>
+
+      </div>
       <% end %>
       <% end %>
     </section>

@@ -13,7 +13,7 @@ class DiariesController < ApplicationController
   end
 
   def new
-    # byebug
+    
     @diary = current_user.diaries.new()
     
     if params[:delete_session]
@@ -39,8 +39,11 @@ class DiariesController < ApplicationController
     @tag_items = []
     @user_tags = current_user.tags
     # @picture = Picture.new(diary_params)
+
+    # binding.pry
+    
     if @diary.save 
-      unless items == []
+      unless items.nil?
         items.each do |item|
           current_user.tags.find_or_create_by(label: item)
           tag_id = current_user.tags.find_by(label: item).id
@@ -55,9 +58,10 @@ class DiariesController < ApplicationController
 
   def edit
     @diary = current_user.diaries.find_by(id: params[:id])
-    @tag_items = @diary.tags
-    @user_tags = current_user.tags - @tag_items
     items = []
+    @tag_items = @diary.tags
+
+    @user_tags = current_user.tags - @tag_items
     render :new
     
   end
@@ -66,24 +70,26 @@ class DiariesController < ApplicationController
     @diary = current_user.diaries.find_by(id: params[:id])
     @diary.is_published= true if params[:is_published] == 'true'
     @diary.is_published= false if params[:is_published] == 'false'
-    items = params[:label]
     @tag_items = @diary.tags
+    items = params[:label]
+    
     @user_tags = current_user.tags - @tag_items
-    diary_tags = @diary.diary_tags.where(diary_id: @diary.id)
-    diary_tags.each do |item|
-      item.destroy
-    end
-
+    
+    diary_tags = @diary.diary_tags
     if @diary.update(diary_params)
-
-      unless items == []
+      unless diary_tags.nil?
+        diary_tags.each do |item|
+          item.destroy
+        end
+      end
+      unless items.nil?
         items.each do |item|
           current_user.tags.find_or_create_by(label: item)
           tag_id = current_user.tags.find_by(label: item).id
-          # binding.pry
           DiaryTag.create(diary_id: @diary.id, tag_id: tag_id)
         end
       end
+      
       redirect_to root_path
     else
       render :new
@@ -92,6 +98,12 @@ class DiariesController < ApplicationController
 
   def destroy
     @diary = current_user.diaries.find_by(id: params[:id])
+    diary_tags = @diary.diary_tags
+    unless diary_tags == []
+      diary_tags.each do |item|
+        item.destroy
+      end
+    end
     @diary.destroy if @diary
     redirect_to root_path
   end

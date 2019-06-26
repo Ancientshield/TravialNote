@@ -55,8 +55,9 @@
 
 
       <div class="form-tag">
+
         <div class="tags TagItems">
-        <% unless @tag_items == [] %>
+        <% unless @tag_items.nil? %>
           <% @tag_items.each do |tag| %>
             <span class="tag-item"><%= tag.label %></span>
           <% end %>
@@ -64,8 +65,8 @@
         </div>
 
         <div class="tags NewTag">
-          <input type="text" placeholder="輸入Tag" id="tagInput">
-          <input type="button" value="新增" id="tagBtn">
+          <input type="text" placeholder="輸入Tag" id="tagInput" class="">
+          <input type="button" value="新增" id="tagBtn" class="btn btn-primary">
         </div>
 
 
@@ -76,8 +77,6 @@
           <% end %>
         </div>
       </div>
-
-
 
     </section>
 
@@ -106,7 +105,7 @@ $(document).ready(function(){
   var originUserTags;
 
   if ($('.TagItems .tag-item').length!=0){
-    originTags = $('.TagItems').get()[0].innerText.split(" ")
+    originTags = $('.TagItems').get()[0].innerText.split("\n")
     originTags.forEach(function(item){
       createHiddenInput(item)
     })
@@ -145,7 +144,7 @@ $(document).ready(function(){
 
 
 function createHiddenInput(item){
-  let HiddenInput = "<input type='hidden' name='label[]' value='"+ item +"'>"
+  let HiddenInput = "<input type='text' name='label[]' value='"+ item +"'>"
   $('.hidden_form').append(HiddenInput)
 }
 function removeHiddenInput(item){

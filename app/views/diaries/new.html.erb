@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 
 function createHiddenInput(item){
-  let HiddenInput = "<input type='text' name='label[]' value='"+ item +"'>"
+  let HiddenInput = "<input type='hidden' name='label[]' value='"+ item +"'>"
   $('.hidden_form').append(HiddenInput)
 }
 function removeHiddenInput(item){

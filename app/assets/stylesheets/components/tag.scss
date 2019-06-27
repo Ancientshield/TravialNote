@@ -44,12 +44,11 @@
   overflow-y: scroll;
 }
 .TagItems:before{
-  content:'標記在此篇日記的標籤: (點選可移除)';
+  content:'已貼上的標籤：';
   display: block;
   width: 100%;
   margin-bottom: 10px;
   color: #333;
-  height: 50px;
 }
 .TagItems:after{
   content: '';
@@ -57,12 +56,12 @@
   width: 100%;
   height: 2px;
   background-color: #ccc;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .NewTag{
   height: 50px;
-  margin-top: 20px;
+  margin-top: 10px;
   &:before{
     content: '';
     display: block;
@@ -76,8 +75,10 @@
 }
 .UserTags{
   width: 100%;
+  margin-top: 10px;
+  max-height: 140px;
   &:before{
-    content: '快速加入您現有的標籤:';
+    content: '快速貼上您現有的標籤:';
     display: block;
     width: 100%;
     margin-bottom: 10px;

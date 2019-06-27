@@ -2,6 +2,12 @@
 <%= render 'layouts/nav' %>
 <div class="container">
     <section class="main">
+        <%= @pocket.location['name'] %>
+        <%= @pocket.location['address'] %>
+        <%= simple_form_for(@pocket, method: :post, url: pockets_path) do |f| %>
+        <%= f.input :expect_date, as: :date, html5: true,label: '預計拜訪時間：' %>
+        <%= f.submit %>
+        <% end %>
     </section>
     <section class="layouts/sidebar">
     </section>

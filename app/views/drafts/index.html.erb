@@ -32,9 +32,8 @@
         </div>
 
         <div class="pic">
-          <img src="https://picsum.photos/200/300/?random" alt="diary picture">
+          <%= image_tag diary.picture if diary.picture.attached? %>
         </div>
-
       </div>
       <% end %>
       </div>

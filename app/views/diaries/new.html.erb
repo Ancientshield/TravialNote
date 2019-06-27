@@ -32,12 +32,36 @@
         <% end %>
       </div>
 
-      <div class="form-content"><%= form.input :content, label: false, placeholder: '輸入內容' %></div>
+      <div class="form-content"><%= form.input :content, label: false, placeholder: '記錄點什麼吧^_^' %></div>
       
         <div class="hidden_form">
         </div>
 
 
+      <div class="form-tag">
+
+        <div class="tags TagItems">
+        <% unless @tag_items.nil? %>
+          <% @tag_items.each do |tag| %>
+            <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        <% end %>
+        </div>
+
+
+
+
+        <div class="tags UserTags">
+          <% @user_tags.each do |tag| %>
+          <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        </div>
+        <div class="tags NewTag">
+          <input type="text" placeholder="輸入Tag" id="tagInput" class="">
+          <input type="button" value="新增自訂標籤" id="tagBtn" class="btn btn-primary">
+        </div>
+
+      </div>
 
       <section class="btn-link">
         <input type="hidden" id="is_published" name="is_published" value="false" />
@@ -54,29 +78,6 @@
 
 
 
-      <div class="form-tag">
-
-        <div class="tags TagItems">
-        <% unless @tag_items.nil? %>
-          <% @tag_items.each do |tag| %>
-            <span class="tag-item"><%= tag.label %></span>
-          <% end %>
-        <% end %>
-        </div>
-
-        <div class="tags NewTag">
-          <input type="text" placeholder="輸入Tag" id="tagInput" class="">
-          <input type="button" value="新增" id="tagBtn" class="btn btn-primary">
-        </div>
-
-
-
-        <div class="tags UserTags">
-          <% @user_tags.each do |tag| %>
-          <span class="tag-item"><%= tag.label %></span>
-          <% end %>
-        </div>
-      </div>
 
     </section>
 
@@ -144,7 +145,7 @@ $(document).ready(function(){
 
 
 function createHiddenInput(item){
-  let HiddenInput = "<input type='text' name='label[]' value='"+ item +"'>"
+  let HiddenInput = "<input type='hidden' name='label[]' value='"+ item +"'>"
   $('.hidden_form').append(HiddenInput)
 }
 function removeHiddenInput(item){

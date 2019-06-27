@@ -59,9 +59,13 @@
     width: 25%;
     overflow: hidden;
     height: 100%;
+    position: relative;
     img{
-      width: 100%;
-      height: auto;
+      position: absolute;
+      right: 0px;
+      margin: 0 auto;
+      height: 100%;
+      width: auto;
       vertical-align: middle;
     }
   }

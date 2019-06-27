@@ -14,7 +14,7 @@ class DiariesController < ApplicationController
 
   def new
     
-    @diary = current_user.diaries.new()
+    @diary = current_user.diaries.new(diary_date: Time.now)
     
     if params[:delete_session]
       session.delete(:location)

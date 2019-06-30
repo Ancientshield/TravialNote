@@ -1,8 +1,337 @@
-.devise_wrap{
-  .bg{
-    width: 100%;
-    height: 400px;
-    background-image: asset-data-url('balloonbg.jpeg');
-    background-size: 100%;
+.wrap{
+  width: 100%;
+  height: 100vh;
+  background-image: asset-data-url('balloonbg.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  overflow: scroll;
+  
+  .form-page{
+    z-index: 1;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 94%; 
+    height: 94%;
+    background-image: asset-data-url('balloon-2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 80% center;
+    box-shadow: 0px 0px 20px #444;
+    h1{
+      position: absolute;
+      left: 30px;
+      top: 25px;
+      color: #222;
+      font-size: 42px;
+    }
+
+  &:before{
+    content: '';
+    display: none;
+  }
+
+  &:after{
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-width: 0 5px 5px 0;
+    border-color: #eee;
+    border-style: solid;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    animation: arrow 1s infinite;
+    z-index: 1;
+  }
+  @keyframes arrow{
+    0%{ bottom:20px }
+    90% { bottom:10px ;opacity:1 }
+    100% { bottom:10px ;opacity: 0 }
+  }
+}
+  .slogn{
+    background-color: #eee;
+    position: absolute;
+    width: calc(100% + 16px);
+    bottom: 10%;
+    left: -8px;
+    text-align: center;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 2px #333;
+    p{
+      // color: #555;
+      font-size: 14px;
+      letter-spacing: 2px;
+      line-height: 28px;
+    }
+    &:after{
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: #333 solid 8px;
+      border-left: solid 8px transparent;
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+    }
+    &:before{
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: #333 solid 8px;
+      border-bottom: solid 8px transparent;
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+    }
+  }
+  .form{
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    text-indent: 16px;
+    font-size: 12px;
+    box-shadow: 0px 1px 5px #555;
+    background-color: rgba(255, 255, 255, 0.6);
+    h2{
+      width: 100%;
+      font-size: 18px;
+    }
+    form{
+      padding: 5px 0 10px;
+    }
+    .form-inputs{
+      text-indent: 0;
+      padding-left: 16px;
+      padding-right: 16px;
+      input{
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid #ccc;
+        margin-top: 10px;
+        width: 100%;
+      }
+      input[type="checkbox"]{
+        width: auto;
+        margin-right: 10px;
+      }
+    }
+    .form-actions{
+      margin: 15px auto 0;
+    }
+  }
+  .form-actions{
+    .btn{
+      display: block;
+      margin: 0 auto;
+      width: 70px;
+      line-height: 30px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.links{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(238, 238, 238, 0.5);
+  margin-top: 10px;
+  a{
+    text-align: center;
+    text-indent: 0;
+    padding: 2px 5px;
+  }
+}
+
+.wrap div.sign-up, .wrap div.forgot{
+  &:after, &:before{
+    display: none;
+  }
+}
+
+@media screen and (max-width:375px){
+  div.wrap{
+    min-height: auto;
+  }
+  .wrap .slogn{
+    padding: 5px;
+    bottom: 7%;
+    p{
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}
+@media screen and (max-width:667px){
+  .wrap{
+    min-height: 1000px;
+  }
+}
+
+@media screen and (min-width:376px){
+  .wrap .form-page{
+    .form{
+      background-color: none;
+      width: 45%;
+      padding-left: 0;
+      h2{
+        width: 100%;
+        font-size: 22px;
+        border-bottom: 1px solid #222;
+        margin-bottom: 20px;
+      }
+      form{
+        border: 0;
+        padding: 0;
+      }
+      .form-inputs{
+        input{
+          background-color: transparent;
+          border: none;
+          border-bottom: 2px solid #ccc;
+          margin: 10px auto;
+          width: 100%;
+          font-size: 20px;
+        }
+        input[type="checkbox"]{
+          width: auto;
+          margin-right: 10px;
+        }
+      }
+      .form-actions{
+        input{
+          font-size: 22px;
+          padding: 5px 10px;
+          width: auto;
+        }
+      }
+    }
+  }
+
+
+}
+
+@media screen and (min-width:769px){
+  .wrap .form-page{
+    &:before{
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-width: 0 5px 5px 0;
+      border-color: #777;
+      border-style: solid;
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+    }
+  
+    &:after{
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-width: 0 5px 5px 0;
+      border-color: #eee;
+      border-style: solid;
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+      animation: arrow 1s infinite;
+    }
+    @keyframes arrow{
+      0%{ bottom:-30px; opacity:1 }
+      70% { bottom:-50px; opacity:1 }
+      100% { bottom:-50px; opacity: 0 }
+    }
+  }
+  .wrap .form-page{
+    max-width: 1200px;
+    height: 80%;
+    background-color: #eee;
+    background-image: asset-data-url('balloon-1.png');
+    background-position: -35vw top;
+  
+    .slogn{
+      width: auto;
+      box-shadow: 2px 3px 2px #333;
+      p{
+        font-size: 18px;
+        letter-spacing: 2px;
+        line-height: 28px;
+      }
+      &:after{
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: #333 solid 8px;
+        border-left: solid 8px transparent;
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+      }
+      &:before{
+        display: none;
+      }
+    }
+    .form{
+      box-shadow: none;
+      background-color: transparent;
+      opacity: 1;
+      width: 26%;
+      padding-left: 0;
+      position: absolute;
+      top: 30%;
+      left: 63%;
+      h2{
+        width: 100%;
+        font-size: 18px;
+        border-bottom: 1px solid #222;
+        margin-bottom: 20px;
+      }
+      .form-inputs{
+        text-indent: 0;
+        padding-left: 16px;
+        
+        input{
+          background-color: #eee;
+          border: none;
+          border-bottom: 2px solid #ccc;
+          margin: 10px auto;
+          width: 100%;
+          font-size: 16px;
+        }
+        input[type="checkbox"]{
+          width: auto;
+          margin-right: 10px;
+        }
+      }
+      .form-actions{
+        input{
+          font-size: 18px;
+          margin: 15px 16px 0 auto;
+          background-color: #006ce1;
+          color: #fff;
+          padding: 5px 10px;
+          width: auto;
+          box-shadow: 0px 2px 3px #002c5a;
+        }
+      }
+      .links{
+        margin-top:15px; 
+      }
+    }
   }
 }

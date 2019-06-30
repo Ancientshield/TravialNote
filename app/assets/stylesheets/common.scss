@@ -4,7 +4,6 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
-  color: none;
 }
 
 @import 'vars';
@@ -15,6 +14,10 @@ input{
   color: none;
 }
 .wrap{
+  width: 100%;
+  overflow: hidden;
+}
+.diarywrap{
   width: 100%;
   overflow: hidden;
   background-color: #fafafa;

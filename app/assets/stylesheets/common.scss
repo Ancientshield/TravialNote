@@ -1,3 +1,4 @@
+@import 'vars';
 *{
   box-sizing: border-box;
   margin: 0;
@@ -5,13 +6,9 @@
   list-style: none;
   text-decoration: none;
 }
-
-@import 'vars';
 a{
   color: #000;
-}
-input{
-  color: none;
+  text-decoration: none;
 }
 .wrap{
   width: 100%;

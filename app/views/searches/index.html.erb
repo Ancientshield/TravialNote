@@ -1,0 +1,29 @@
+<div class="wrap">
+
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/nav' %>
+  <div class="container">
+
+    <section class="main no_draft">
+      <%= form_tag search_content_path, method: :get do %>
+
+       <%= text_field_tag :search, params[:search] %>
+       <%= submit_tag 'Search' %>
+      <% end %>
+
+      <% @diaries.each do |diary| %>
+        <%= diary.content %>
+      <% end %>    
+
+      <% @tags.each do |tag| %>
+        <%= tag.label %>
+      <% end %> 
+
+
+      <p><%= link_to 'Back', diaries_path %></p>
+      
+    </section>
+
+
+    
+</div>

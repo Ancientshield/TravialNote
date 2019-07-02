@@ -2,6 +2,7 @@ class PocketsController < ApplicationController
   before_action :authenticate_user!
   def index
     @pocket_lists = PocketList.new
+    byebug
   end
 
   def new

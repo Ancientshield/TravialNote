@@ -36,7 +36,7 @@
   top: 11px;
 }
 
-.TagItems, .UserTags{
+.TagItems, .UserTags, .SearchTags{
   display: flex;
   flex-flow: wrap;
   align-items: flex-start;
@@ -93,6 +93,11 @@
   }
   .tag-item:after{
     background-color: #777;
+  }
+}
+.SearchTags{
+  a{
+    margin: 5px 2px;
   }
 }
 

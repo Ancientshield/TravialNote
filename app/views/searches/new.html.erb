@@ -1,0 +1,27 @@
+<div class="diarywrap">
+
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/nav' %>
+  <div class="container">
+
+    <section class="main">
+    <div class="form-search">
+      <%= form_tag search_path, method: :get do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag 'Search' %>
+      <% end %>
+    </div>
+    </section>
+
+    <section class="sidebar">
+      <div class="tags SearchTags">
+        <% @tags.each do |tag| %>
+          <%= link_to search_path(tag.id) do %>
+            <span class="tag-item"><%= tag.label %></span>
+          <% end %>
+        <% end %> 
+      </div>
+    </section>
+  </div>
+    
+</div>

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     resources :map_session, only: :create
   end
 
-  get '/search_content', to: 'searches#index' 
-
+  # get '/search_content', to: 'searches#index' 
+  resource :search, only: [:new,:show,:create]
   resource :tag
   resources :drafts
   resources :pictures

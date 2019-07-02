@@ -1,8 +1,8 @@
 class PocketsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @pocket_lists = PocketList.new
-    byebug
+    # @pocket_lists = PocketList.find_by(id: current_user.id)
+     @pocket_lists = PocketList.all
   end
 
   def new

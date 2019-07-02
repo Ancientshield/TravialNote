@@ -12,13 +12,13 @@
                 </tr>
             </thead>
             <tbody>
-                <%# @pocket_lists.each do |p| %>
+                <% @pocket_lists.each do |p| %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%= p.location['name'] %></td>
+                    <td><%= p.location['address'] %></td>
+                    <td><%= p.expect_date %></td>
                 </tr>
-                <%# end %>
+                <% end %>
             </tbody>
         </table>
     </section>

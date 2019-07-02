@@ -21,8 +21,8 @@
                     <td><%= p.location['address'] %></td>
                     <td><%= p.expect_date %></td>
                     <td><%= p.description %></td>
-                    <td><%= link_to '編輯', edit_pocket_path() %></td>
-                    <td><%= link_to '刪除', pocket_path() %></td>
+                    <td><%= link_to '編輯', edit_pocket_path(:id) %></td>
+                    <td><%= link_to '刪除', pocket_path(:id) %></td>
                 </tr>
                 <% end %>
             </tbody>

@@ -2,7 +2,12 @@ class DiariesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @diaries = current_user.diaries.where(is_published: true)
+    @diaries = current_user.diaries.where(is_published: true).order(:diary_date)
+
+    if current_user.diaries.where(is_published: false).any?
+      @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
+    end
+
   end
 
   def show
@@ -13,7 +18,12 @@ class DiariesController < ApplicationController
   end
 
   def new
-    
+    if current_user.diaries.where(is_published: false).any?
+      @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
+    else
+      redirect_to new_draft_path
+    end
+
     @diary = current_user.diaries.new(diary_date: Time.now)
     
     if params[:delete_session]
@@ -40,8 +50,7 @@ class DiariesController < ApplicationController
     @user_tags = current_user.tags
     # @picture = Picture.new(diary_params)
 
-    # binding.pry
-    
+
     if @diary.save 
       unless items.nil?
         items.each do |item|

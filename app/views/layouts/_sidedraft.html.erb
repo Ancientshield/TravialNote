@@ -3,6 +3,7 @@
   <% @drafts.each do |draft| %>
   <a class="sidelink" href="#">
     <section class="sidebar-list">
+    
       <div class="date">
         <div>
           <span class="month"><%= draft.diary_date.month %></span>
@@ -12,7 +13,7 @@
           <span class="week"><%= draft.week %></span>
         </div>
       </div>
-      <div class="content"><%= draft.content %></div>
+      <div class="content"><%= simple_format(excerpt(draft.content,'',radius: 10)) %></div>
       <div class="pic">
         <%= image_tag draft.picture if draft.picture.attached? %>
       </div>

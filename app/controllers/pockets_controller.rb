@@ -14,11 +14,19 @@ class PocketsController < ApplicationController
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
     @pocket.expect_date = params[:pocket_list][:expect_date]
+    @pocket.description = params[:pocket_list][:description]
     if @pocket.save
       redirect_to pockets_path, notice: "加入口袋成功！"
     else
       render :new
     end
+  end
+
+  def edit
+    @pocket = current_user.pocket_lists.find_by(id: params[:id])
+  end
+
+  def destroy
   end
 
   def set_map_session

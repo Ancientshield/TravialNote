@@ -17,27 +17,29 @@
         <% end %>
       </div>
       <div>
-      <%= link_to diary_path(diary),class:'diary' do %>
-      <div class="items">
-        <div class="date">
-          <span class="day"><%= diary.diary_date.day %></span>
-          <span class="week"><%= diary.week %></span>
-        </div>
-
-        <div class="info">
-          <div class="content">
-            <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
+        <%= link_to diary_path(diary),class:'diary' do %>
+        <div class="items">
+          <div class="date">
+            <span class="day"><%= diary.diary_date.day %></span>
+            <span class="week"><%= diary.week %></span>
           </div>
-          <div class="location"><%= diary.location  %></div>
-        </div>
 
-        <div class="pic">
-          <%= image_tag diary.picture if diary.picture.attached? %>
+          <div class="info">
+            <div class="content">
+              <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
+            </div>
+            <% if diary.location.try(:[], 'address') %>
+            <div class="location"><% diary.location.try(:[], 'address') %></div>
+            <% end %>
+          </div>
+
+          <div class="pic">
+            <%= image_tag diary.picture if diary.picture.attached? %>
+          </div>
         </div>
+        <% end %>
       </div>
       <% end %>
-      </div>
-    <% end %>
     </section>
 
 

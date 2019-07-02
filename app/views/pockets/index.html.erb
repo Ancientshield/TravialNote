@@ -9,6 +9,9 @@
                     <th>地點</th>
                     <th>地址</th>
                     <th>時間</th>
+                    <th>描述</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +20,9 @@
                     <td><%= p.location['name'] %></td>
                     <td><%= p.location['address'] %></td>
                     <td><%= p.expect_date %></td>
+                    <td><%= p.description %></td>
+                    <td><%= link_to '編輯', edit_pocket_path() %></td>
+                    <td><%= link_to '刪除', pocket_path() %></td>
                 </tr>
                 <% end %>
             </tbody>

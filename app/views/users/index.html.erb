@@ -9,8 +9,8 @@
 
     }
 
-    .infocus {
-        background-color: #999;
+    button:focus {
+        background-color: rgb(211, 204, 204);
     }
 
     .store-places {
@@ -50,13 +50,19 @@
 <script type="text/javascript">
     var map, infoWindow, address, address_contury, address_area;
     function initMap() {
-        console.log('initMap')
-        let pyrmont = { lat: 25.04, lng: 121.51 };
-        var geocoder = new google.maps.Geocoder();
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: pyrmont,
-            zoom: 14
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
         });
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+        });
+
+        var geocoder = new google.maps.Geocoder();
 
         let service = new google.maps.places.PlacesService(map);
         infoWindow = new google.maps.InfoWindow;
@@ -79,7 +85,7 @@
                 var bounds = new google.maps.LatLngBounds();
                 var placesList = document.getElementById('places');
                 //console.log(placesList);
-                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
+                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=<%= Figaro.env.google_api_key %>`)
                     .then(function (response) {
                         return response.json();
                     })

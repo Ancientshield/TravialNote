@@ -1,13 +1,15 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
-
+ 
   def index
     @diaries = current_user.diaries.where(is_published: true)
+    
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
   end
 
   def show
     @diary = current_user.diaries.find_by(id: params[:id])
-
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
     @tag_items = @diary.tags
 
   end
@@ -15,7 +17,7 @@ class DiariesController < ApplicationController
   def new
     
     @diary = current_user.diaries.new(diary_date: Time.now)
-    
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
     if params[:delete_session]
       session.delete(:location)
     end
@@ -58,6 +60,7 @@ class DiariesController < ApplicationController
 
   def edit
     @diary = current_user.diaries.find_by(id: params[:id])
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
     items = []
     @tag_items = @diary.tags
 

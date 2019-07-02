@@ -1,21 +1,23 @@
 <section class="sidebar-draft">
   <header>draft</header>
+  <% @drafts.each do |draft| %>
   <a class="sidelink" href="#">
     <section class="sidebar-list">
       <div class="date">
         <div>
-          <span class="month">7</span>
-          <span class="day">24</span>
+          <span class="month"><%= draft.diary_date.month %></span>
+          <span class="day"><%= draft.diary_date.day %></span>
         </div>
         <div>
-          <span class="week">三</span>
+          <span class="week"><%= draft.week %></span>
         </div>
       </div>
-      <div class="content">我是日記內容</div>
+      <div class="content"><%= draft.content %></div>
       <div class="pic">
-        <img src="https://picsum.photos/200/200/?random">
+        <%= image_tag draft.picture if draft.picture.attached? %>
       </div>
     </section>
   </a>
+  <% end %>
   <%= link_to 'more...', drafts_path, class:'more' %>
 </section>

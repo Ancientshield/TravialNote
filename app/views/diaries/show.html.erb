@@ -6,7 +6,12 @@
     <section class="main">
       <section class="show-diary">
         <div class="picture"><%= image_tag @diary.picture if @diary.picture.attached? %></div>
-        <div class="location"><%=  %></div>
+        <div class="location">
+          <% if @diary.location.try(:[],"name") %>
+          <h1><%= @diary.location.try(:[],"name") %></h1>
+          <%= render 'diaries/map' %>
+          <% end %>
+        </div>
         <div class="date">
           <%= @diary.diary_date.year %>年
           <%= @diary.diary_date.month %>月

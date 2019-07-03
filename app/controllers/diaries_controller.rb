@@ -50,8 +50,7 @@ class DiariesController < ApplicationController
 
     @diary.location = session[:location]
 
-    # binding.pry
-    if @diary.save
+    if @diary.save 
       unless items.nil?
         items.each do |item|
           current_user.tags.find_or_create_by(label: item)

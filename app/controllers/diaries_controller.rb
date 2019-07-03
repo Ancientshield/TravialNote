@@ -47,7 +47,6 @@ class DiariesController < ApplicationController
     @tag_items = []
     @user_tags = current_user.tags
     # @picture = Picture.new(diary_params)
-
     @diary.location = session[:location]
 
     # binding.pry

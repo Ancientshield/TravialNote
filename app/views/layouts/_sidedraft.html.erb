@@ -15,6 +15,7 @@
       </div>
       <div class="content"><%= simple_format(excerpt(draft.content,'',radius: 10)) %></div>
       <div class="pic">
+        <%= image_tag draft.picture if draft.picture.attached? %>
       </div>
     </section>
   </a>

@@ -1,7 +1,8 @@
 <section class="main">
+
+    <%= simple_form_for(p, method: :post, url: pockets_path) do |f| %>
     <div><%= p.location['name'] %></div>
     <div><%= p.location['address'] %></div>
-    <%= simple_form_for(p, method: :post, url: pockets_path) do |f| %>
     <div><%= f.input :expect_date, as: :date, html5: true, label: '預計拜訪時間：' %></div>
     <div><%= f.input :description, label:'描述：', placeholder: '加點喜歡的描述吧' %></div>
     <div><%= f.submit '儲存' %></div>

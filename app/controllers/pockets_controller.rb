@@ -1,13 +1,15 @@
 class PocketsController < ApplicationController
   before_action :authenticate_user!
   def index
-    # @pocket_lists = PocketList.find_by(id: current_user.id)
-     @pocket = PocketList.all
+    #@pocket_lists = PocketList.find_by(id: current_user.id)
+    @pocket = current_user.pocket_lists
+    #@pocket = PocketList.where(user_id: params[:id])
   end
 
   def new
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
+
   end
 
   def create
@@ -21,17 +23,25 @@ class PocketsController < ApplicationController
       render :new
     end
   end
-
+  
   def edit
-    @pocket = current_user.pocket_lists.find_by(id: params[:id])
+    @pocket = PocketList.find_by(user_id: params[:id])
+  end
+
+  def update
+    @pocket = PocketList.find_by(user_id: params[:id])
+    if @pocket.update
+      redirect_to pockets_path, notice: "修改口袋成功！"
+    end
   end
 
   def show
-    @pocket = current_user.pocket_lists.find_by(id: params[:id])
+    @pocket = PocketList.find_by(user_id: params[:id])
+    #@pocket = current_user.pocket_lists.find_by(id: params[:id])
   end
 
   def destroy
-    @pocket = current_user.pocket_lists.find_by(id: params[:id])
+    @pocket = current_user.pocket_lists
     if @pocket.destroy
       redirect_to pockets_path, notice: "刪除成功！"
     end

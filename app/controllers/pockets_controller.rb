@@ -2,7 +2,7 @@ class PocketsController < ApplicationController
   before_action :authenticate_user!
   def index
     # @pocket_lists = PocketList.find_by(id: current_user.id)
-     @pocket_lists = PocketList.all
+     @pocket = PocketList.all
   end
 
   def new
@@ -24,9 +24,20 @@ class PocketsController < ApplicationController
 
   def edit
     @pocket = current_user.pocket_lists.find_by(id: params[:id])
+    if @pocket.save
+      redirect_to pockets_path, notice: "修改口袋成功！"
+    end
+  end
+
+  def show
+    @pocket = current_user.pocket_lists.find_by(id: params[:id])
   end
 
   def destroy
+    @pocket = current_user.pocket_lists.find_by(id: params[:id])
+    if @pocket.destroy
+      redirect_to pockets_path, notice: "刪除成功！"
+    end
   end
 
   def set_map_session

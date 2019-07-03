@@ -15,14 +15,15 @@
                 </tr>
             </thead>
             <tbody>
+                <%# binding.pry %>
                 <% @pocket.each do |p| %>
                 <tr>
                     <td><%= p.location['name'] %></td>
                     <td><%= p.location['address'] %></td>
                     <td><%= p.expect_date %></td>
                     <td><%= p.description %></td>
-                    <td><%= link_to '編輯', edit_pocket_path(p) %></td>
-                    <td><%= link_to '刪除', pocket_path(p), method: "delete", data: { confirm: "確認刪除？" } %></td>
+                    <td><%= link_to '編輯', edit_pocket_path(:id) %></td>
+                    <td><%= link_to '刪除', pocket_path(:id) %></td>
                 </tr>
                 <% end %>
             </tbody>

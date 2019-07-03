@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :diaries
   has_many :tags
+  has_many :pocket_lists
 end

@@ -28,7 +28,11 @@
           <div class="content">
             <%= simple_format(excerpt(diary.content,'',radius: 20)) %>
           </div>
-          <div class="location"><%= diary.location %></div>
+          <% if diary.location.try(:[], 'address') %>
+          <div class="location">
+            <%= diary.location.try(:[], 'address')  %>
+          </div>
+          <% end %>
         </div>
 
         <div class="pic">
@@ -37,7 +41,7 @@
 
       </div>
       <% end %>
-    <% end %>
+      <% end %>
     </section>
 
     <section class="sidebar">

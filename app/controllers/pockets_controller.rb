@@ -24,9 +24,6 @@ class PocketsController < ApplicationController
 
   def edit
     @pocket = current_user.pocket_lists.find_by(id: params[:id])
-    if @pocket.save
-      redirect_to pockets_path, notice: "修改口袋成功！"
-    end
   end
 
   def show

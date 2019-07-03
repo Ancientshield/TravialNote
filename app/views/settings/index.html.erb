@@ -1,0 +1,14 @@
+<div class="diarywrap">
+
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/nav' %>
+  <div class="container">
+    <span>您目前現有的標籤：</apan>
+
+      <div class="tag-settings">
+        <% @user_tags.each do |tag| %>
+        <span><%= tag.label %></span>
+        <% end %>
+      </div>
+    
+</div>

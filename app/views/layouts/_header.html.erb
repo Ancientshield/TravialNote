@@ -7,7 +7,7 @@
       </li>
       <li class='list'>
       </li>
-      <li><%= link_to 'Setting', '#' %></li>
+      <li><%= link_to 'Setting', settings_path %></li>
       <% if user_signed_in? %>
         <li><%= link_to 'SignOut', destroy_user_session_path, method:'delete' %></li>
       <% end %>

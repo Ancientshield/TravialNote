@@ -17,6 +17,7 @@ class DiariesController < ApplicationController
   end
 
   def new
+    @diary = current_user.diaries.new(diary_date: Time.now)
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
     @diary = current_user.diaries.new(diary_date: Time.now)
   

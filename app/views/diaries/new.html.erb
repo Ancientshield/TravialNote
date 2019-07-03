@@ -11,12 +11,17 @@
       <div class="form-pic">
 
 
-        <%= form.file_field :picture, class: 'upl' %>
         <div>
-          <img class="preview" style="max-width: 150px; max-height: 150px;">
+          <img class="preview">
           <div class="size"></div>
         </div>
-
+        <div class="upload-btn">
+          <%= form.label(:picture)  do %>
+            <div class="btn">Upload Image</div>
+          <% end %>
+          <%= form.file_field :picture, class: 'upl pic', style: 'display:none;' %>
+          
+        </div>
       </div>
 
 

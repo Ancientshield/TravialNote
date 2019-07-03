@@ -1,6 +1,6 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!
- 
+  
   def index
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
 
@@ -11,19 +11,15 @@ class DiariesController < ApplicationController
   def show
     @diary = current_user.diaries.find_by(id: params[:id])
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
+    
     @tag_items = @diary.tags
 
   end
 
   def new
-    if current_user.diaries.where(is_published: false).any?
-      @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
-    else
-      redirect_to new_draft_path
-    end
-
-    @diary = current_user.diaries.new(diary_date: Time.now)
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
+    @diary = current_user.diaries.new(diary_date: Time.now)
+  
     if params[:delete_session]
       session.delete(:location)
     end
@@ -127,5 +123,6 @@ class DiariesController < ApplicationController
     params.require(:diary).permit(:content,:location,:diary_date,:picture)
   end
 
+  
 
 end

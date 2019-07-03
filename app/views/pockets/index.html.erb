@@ -25,14 +25,14 @@
             </thead>
             <tbody>
                 <%# binding.pry %>
-                <% @pocket.each do |p| %>
+                <% @pockets.each do |pocket| %>
                 <tr>
-                    <td><%= p.location['name'] %></td>
-                    <td><%= p.location['address'] %></td>
-                    <td><%= "#{p.expect_date.year}-#{p.expect_date.month}-#{p.expect_date.day}" %></td>
-                    <td><%= p.description %></td>
-                    <td><%= link_to '編輯', edit_pocket_path(p) %></td>
-                    <td><%= link_to '刪除', pocket_path(p), method: "delete", data: { confirm: "確認刪除？" }, class:"btn btn-danger btn-xs" %>
+                    <td><%= pocket.location['name'] %></td>
+                    <td><%= pocket.location['address'] %></td>
+                    <td><%= "#{pocket.expect_date.year}-#{pocket.expect_date.month}-#{pocket.expect_date.day}" %></td>
+                    <td><%= pocket.description %></td>
+                    <td><%= link_to '編輯', edit_pocket_path(pocket) %></td>
+                    <td><%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"btn btn-danger btn-xs" %>
                     </td>
                 </tr>
                 <% end %>

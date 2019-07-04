@@ -5,13 +5,13 @@ class DiariesController < ApplicationController
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
 
     @diaries = current_user.diaries.where(is_published: true).order(:diary_date)
-
+    @pockets = current_user.pocket_lists.order(created_at: :asc)
   end
 
   def show
     @diary = current_user.diaries.find_by(id: params[:id])
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
-    
+    @pockets = current_user.pocket_lists.order(created_at: :asc)
     @tag_items = @diary.tags
 
   end
@@ -19,7 +19,7 @@ class DiariesController < ApplicationController
   def new
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
     @diary = current_user.diaries.new(diary_date: Time.now)
-  
+    @pockets = current_user.pocket_lists.order(created_at: :asc)
     if params[:delete_session]
       session.delete(:location)
     end
@@ -63,6 +63,7 @@ class DiariesController < ApplicationController
   def edit
     @diary = current_user.diaries.find_by(id: params[:id])
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
+    @pockets = current_user.pocket_lists.order(created_at: :asc)
     items = []
     @tag_items = @diary.tags
 

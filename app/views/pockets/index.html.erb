@@ -42,8 +42,12 @@
       <%# binding.pry %>
       <% @pockets.each do |pocket| %>
       <tr>
-        <td><%= pocket.location['name'] %></td>
-        <td><%= pocket.location['address'] %></td>
+        <% if pocket.location.try(:[],'name') %>
+        <td><%= pocket.location.try(:[],'name') %></td>
+        <% end %>
+        <% if pocket.location.try(:[],'address') %>
+        <td><%= pocket.location.try(:[],'address') %></td>
+        <% end %>
         <td><%= "#{pocket.expect_date.year}-#{pocket.expect_date.month}-#{pocket.expect_date.day}" %></td>
         <td><%= pocket.description %></td>
         <td><%= link_to '編輯', edit_pocket_path(pocket), class:"btn btn-outline-secondary btn-linkto" %>

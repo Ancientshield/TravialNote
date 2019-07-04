@@ -1,44 +1,37 @@
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
-    <section class="main">
-        <%= notice %>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>地點</th>
-                    <th>地址</th>
-                    <th>時間</th>
-                    <th>描述</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <%# binding.pry %>
-                <% @pocket.each do |p| %>
-                <tr>
-                    <td><%= p.location['name'] %></td>
-                    <td><%= p.location['address'] %></td>
-                    <td><%= p.expect_date %></td>
-                    <td><%= p.description %></td>
-                    <td><%= link_to '編輯', edit_pocket_path(p), method: "update" %></td>
-                    <td><%= link_to '刪除', pocket_path(p), method: "delete", data: { confirm: "確認刪除？" }, class:"btn-danger" %>
-                    </td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </section>
-    <section class="layouts/sidebar">
-    </section>
+  <%= notice %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>地點</th>
+        <th>地址</th>
+        <th>時間</th>
+        <th>描述</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%# binding.pry %>
+      <% @pockets.each do |pocket| %>
+      <tr>
+        <td><%= pocket.location['name'] %></td>
+        <td><%= pocket.location['address'] %></td>
+        <td><%= pocket.expect_date %></td>
+        <td><%= pocket.description %></td>
+        <td><%= link_to '編輯', edit_pocket_path(pocket), method: "update" %></td>
+        <td><%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"btn-danger" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

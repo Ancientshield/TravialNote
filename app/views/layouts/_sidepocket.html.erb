@@ -31,7 +31,9 @@
           <span class="week"><%= pocket.week %></span>
         </div>
       </div>
+      <% if pocket.location.try(:[], 'name') %>
       <div class="location"><%= pocket.location['name'] %></div>
+      <% end %>
     </section>
   </a>
   <% end %>

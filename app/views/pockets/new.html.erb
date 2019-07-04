@@ -1,5 +1,7 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
-  <%= render "form", p: @pocket %>
+  <% if @pocket.location.try(:[],"name") %>
+  <%= render "form", pocket: @pocket %>
+  <% end %>
 </div>

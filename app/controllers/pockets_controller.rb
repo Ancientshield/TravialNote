@@ -12,7 +12,6 @@ class PocketsController < ApplicationController
   def new
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
-
   end
 
   def create

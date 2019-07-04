@@ -19,7 +19,7 @@
   var map, infoWindow, address, address_contury, address_area;
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 16,
+      zoom: 15,
     });
 
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -44,7 +44,7 @@
       let lng = e.latLng.lng();
       pyrmont = { lat: lat, lng: lng };
       service.nearbySearch(
-        { location: pyrmont, radius: 300, type: ['store'] },
+        { location: pyrmont, radius: 50 },
         function (results, status, pagination) {
           if (status !== 'OK') return;
           createMarkers(results);
@@ -101,8 +101,8 @@
           //    geoAddress = JSON.stringify(results[0].formatted_address);
           //    console.log(geoAddress);
           //});
-
-          $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }) + `>${place.name}</button>`);
+          var placeStr = escape(JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }));
+          $('#places').append(`<button type="button" class="store-places" value="${placeStr}">${place.name}</button>`);
           $('.store-places').animate({ width: "200px" }, 200);
 
 
@@ -149,7 +149,6 @@
 
   $('.new_diary').on('click', function (event) {
     var $this = $(this);
-    let aaa = JSON.parse($('.infocus').val());
     $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
       var href = $this.attr('href');
       if (href.length > 0)
@@ -167,6 +166,10 @@
         location.href = href;
     });
     return false;
+  });
+
+  $(document).ready(function () {
+
   });
 
 

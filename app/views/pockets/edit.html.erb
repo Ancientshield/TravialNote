@@ -1,6 +1,16 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
+
+  <section class="main">
+    <%# byebug %>
     <h3>編輯口袋</h3>
-    <%= render "from", p: @pocket %>
+    <div><%= @pocket.location['name'] %></div>
+    <div><%= @pocket.location['address'] %></div>
+    <%= simple_form_for(@pocket, url: "#{pockets_path}/#{@pocket.id}") do |f| %>
+    <div><%= f.input :expect_date, as: :date, html5: true, label: '預計拜訪時間：' %></div>
+    <div><%= f.input :description, label:'描述：', placeholder: '加點喜歡的描述吧' %></div>
+    <div><%= f.submit '儲存' %></div>
+    <% end %>
+  </section>
 </div>

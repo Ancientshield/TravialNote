@@ -1,8 +1,11 @@
 class PocketsController < ApplicationController
   before_action :authenticate_user!
+  require 'date'
   def index
     #@pocket_lists = PocketList.find_by(id: current_user.id)
-    @pocket = current_user.pocket_lists
+    # desc 降冪 descending
+    # asc 升冪 ascending
+    @pockets = current_user.pocket_lists.order(created_at: :asc)
     #@pocket = PocketList.where(user_id: params[:id])
   end
 
@@ -15,7 +18,11 @@ class PocketsController < ApplicationController
   def create
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
+    if @pocket.expect_date.nil?
+      @pocket.expect_date = DateTime.now 
+    else
     @pocket.expect_date = params[:pocket_list][:expect_date]
+    end
     @pocket.description = params[:pocket_list][:description]
     if @pocket.save
       redirect_to pockets_path, notice: "加入口袋成功！"
@@ -25,23 +32,28 @@ class PocketsController < ApplicationController
   end
   
   def edit
-    @pocket = PocketList.find_by(user_id: params[:id])
+    # 我要找目前pocket id & 是我的
+    # 顯示編輯頁
+    @pocket = PocketList.find_by(id: params[:id], user_id: current_user.id)
+    # @pocket = current_user.pocket_lists.find(params[:id])
   end
 
   def update
-    @pocket = PocketList.find_by(user_id: params[:id])
-    if @pocket.update
+    @pocket = current_user.pocket_lists.find(params[:id])
+    if @pocket.update!(pocket_params)
       redirect_to pockets_path, notice: "修改口袋成功！"
+    else
+      render :edit
     end
   end
 
   def show
-    @pocket = PocketList.find_by(user_id: params[:id])
+    @pockets = PocketList.find_by(user_id: params[:id])
     #@pocket = current_user.pocket_lists.find_by(id: params[:id])
   end
 
   def destroy
-    @pocket = current_user.pocket_lists
+    @pocket = current_user.pocket_lists.find(params[:id])
     if @pocket.destroy
       redirect_to pockets_path, notice: "刪除成功！"
     end
@@ -50,5 +62,9 @@ class PocketsController < ApplicationController
   def set_map_session
     location_params = params.permit(location: {})
     session[:location] = location_params[:location]
+  end
+
+  def pocket_params
+    params.require(:pocket_list).permit(:expect_date, :description)
   end
 end

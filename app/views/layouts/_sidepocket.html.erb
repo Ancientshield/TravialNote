@@ -19,20 +19,21 @@
 
 <section class="sidebar-pocket">
   <header>pocket</header>
+  <% @pockets.each do |pocket| %>
   <a class="sidelink" href="#">
     <section class="sidebar-list">
       <div class="date">
         <div>
-          <span class="month">7</span>
-          <span class="day">24</span>
+          <span class="month"><%= pocket.expect_date.month %></span>
+          <span class="day"><%= pocket.expect_date.day %></span>
         </div>
         <div>
-          <span class="week">三</span>
+          <span class="week"><%= pocket.week %></span>
         </div>
       </div>
-      <div class="location">日本京都</div>
+      <div class="location"><%= pocket.location['name'] %></div>
     </section>
   </a>
-  
-  <a class="more" href="#">more...</a>
+  <% end %>
+  <%= link_to 'more', pockets_path ,class:'more'%>
 </section>

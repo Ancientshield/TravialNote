@@ -19,7 +19,7 @@ class PocketsController < ApplicationController
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
     if @pocket.expect_date.nil?
-      @pocket.expect_date = DateTime.now 
+      @pocket.expect_date = DateTime.now
     else
     @pocket.expect_date = params[:pocket_list][:expect_date]
     end

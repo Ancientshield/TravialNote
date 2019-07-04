@@ -8,7 +8,7 @@
 <%= render 'layouts/nav' %>
 <div class="container">
   <%= notice %>
-  <table class="table table-hover">
+  <table class="table table-hover table-responsive">
     <thead>
       <tr>
         <th>地點</th>
@@ -28,7 +28,7 @@
         <td><%= pocket.expect_date %></td>
         <td><%= pocket.description %></td>
         <td><%= link_to '編輯', edit_pocket_path(pocket), method: "update" %></td>
-        <td><%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"btn-danger" %>
+        <td><%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"btn" %>
         </td>
       </tr>
       <% end %>

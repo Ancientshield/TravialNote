@@ -1,9 +1,10 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
-  <h3>編輯口袋</h3>
+
   <section class="main">
     <%# byebug %>
+    <h3>編輯口袋</h3>
     <div><%= @pocket.location['name'] %></div>
     <div><%= @pocket.location['address'] %></div>
     <%= simple_form_for(@pocket, url: "#{pockets_path}/#{@pocket.id}") do |f| %>

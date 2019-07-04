@@ -43,7 +43,7 @@
     border-color: #eee;
     border-style: solid;
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     left: 50%;
     transform: translate(-50%) rotate(45deg);
     animation: arrow 1s infinite;
@@ -94,22 +94,24 @@
     }
   }
   .form{
-    width: 60%;
+    width: 80%;
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     text-indent: 16px;
-    font-size: 12px;
+    font-size: 20px;
     box-shadow: 0px 1px 5px #555;
     background-color: rgba(255, 255, 255, 0.6);
     h2{
       width: 100%;
-      font-size: 18px;
+      font-size: 25px;
     }
     form{
       padding: 5px 0 10px;
     }
     .form-inputs{
+      line-height: 50px;
       text-indent: 0;
       padding-left: 16px;
       padding-right: 16px;
@@ -119,6 +121,8 @@
         border-bottom: 2px solid #ccc;
         margin-top: 10px;
         width: 100%;
+        font-size: 20px;
+        line-height: 38px;
       }
       input[type="checkbox"]{
         width: auto;
@@ -133,11 +137,12 @@
     text-align: center;
     .btn{
       display: block;
-      width: 70px;
       margin: 0 auto;
-      
-      line-height: 30px;
+      padding: 5px 10px;
+      line-height: 40px;
       border-radius: 5px;
+      font-size: 30px;
+      box-shadow: 0px 2px 2px #333;
     }
   }
 }
@@ -181,12 +186,9 @@
 @media screen and (min-width:376px){
   .wrap .form-page{
     .form{
-      background-color: transparent;
-      width: 45%;
-      padding-left: 0;
       h2{
         width: 100%;
-        font-size: 22px;
+        font-size: 38px;
         margin-bottom: 20px;
       }
       form{
@@ -209,7 +211,7 @@
       }
       .form-actions{
         input{
-          font-size: 22px;
+          font-size: 34px;
           padding: 5px 10px;
           width: auto;
         }
@@ -261,7 +263,7 @@
     height: 80%;
     background-color: #eee;
     background-image: asset-data-url('balloon-1.png');
-    background-position: -35vw top;
+    background-position: -36vw top;
   
     .slogn{
       width: auto;
@@ -293,11 +295,12 @@
       width: 26%;
       padding-left: 0;
       position: absolute;
-      top: 30%;
+      top: 50%;
       left: 63%;
+      transform: translateY(-50%);
       h2{
         width: 100%;
-        font-size: 18px;
+        font-size: 30px;
         border-bottom: 1px solid #222;
         margin-bottom: 20px;
       }
@@ -330,8 +333,44 @@
         }
       }
       .links{
-        margin-top:15px; 
+        margin-top:123px; 
       }
     }
+  }
+}
+
+@media screen and (min-width:850px){
+  .wrap .form-page{
+    background-position: -50vw top;
+  }
+}
+@media screen and (min-width:900px){
+  .wrap .form-page{
+    background-position: -37vw top;
+  }
+}
+@media screen and (min-width:1400px){
+  .wrap .form-page{
+    background-position: -30vw top;
+  }
+}
+@media screen and (min-width:1700px){
+  .wrap .form-page{
+    background-position: -27vw top;
+  }
+}
+@media screen and (min-width:2000px){
+  .wrap .form-page{
+    background-position: -24vw top;
+  }
+}
+@media screen and (min-width:2300px){
+  .wrap .form-page{
+    background-position: -19vw top;
+  }
+}
+@media screen and (min-width:3000px){
+  .wrap .form-page{
+    background-position: -15vw top;
   }
 }

@@ -1,5 +1,6 @@
 class PocketsController < ApplicationController
   before_action :authenticate_user!
+  require 'date'
   def index
     #@pocket_lists = PocketList.find_by(id: current_user.id)
     # desc 降冪 descending
@@ -17,7 +18,11 @@ class PocketsController < ApplicationController
   def create
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
+    if @pocket.expect_date.nil?
+      @pocket.expect_date = DateTime.now 
+    else
     @pocket.expect_date = params[:pocket_list][:expect_date]
+    end
     @pocket.description = params[:pocket_list][:description]
     if @pocket.save
       redirect_to pockets_path, notice: "加入口袋成功！"

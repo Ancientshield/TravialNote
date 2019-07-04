@@ -5,7 +5,7 @@
 <p>
   <strong>Cover:</strong>
   <div>
-  <%= image_tag(@picture.cover, width: 200) if @picture.cover.attached? %>
+    <%= image_tag(@picture.cover, width: 200) if @picture.cover.attached? %>
   </div>
 </p>
 
@@ -13,11 +13,10 @@
   <strong>Banners:</strong>
   <div>
     <% @picture.banners.each do |banner| %>
-      <%= image_tag banner %>
+    <%= image_tag banner %>
     <% end %>
   </div>
 </p>
 
 
 <%= link_to 'back', diaries_path %>
-

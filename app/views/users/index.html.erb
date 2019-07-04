@@ -2,16 +2,17 @@
   <%= render 'layouts/header' %>
   <%= render 'layouts/nav' %>
   <div class="container">
-      <section class="main form">
-          <div id="map"></div>
-          <section class="btn-link map-link">
-              <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
-              <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto new_pocket' %>
-          </section>
+    <section class="main form">
+      <div id="map"></div>
+      <section class="btn-link map-link">
+        <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
+        <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto new_pocket' %>
       </section>
-      <section class="sidebar map-sidebar">
-          <div id="places" class="places"></div>
-      </section>
+      <div class="choose"></div>
+    </section>
+    <section class="sidebar map-sidebar">
+      <div id="places" class="places"></div>
+    </section>
   </div>
 </div>
 <script type="text/javascript">
@@ -30,76 +31,76 @@
     });
 
 
-        var geocoder = new google.maps.Geocoder();
+    var geocoder = new google.maps.Geocoder();
 
-        let service = new google.maps.places.PlacesService(map);
-        infoWindow = new google.maps.InfoWindow;
+    let service = new google.maps.places.PlacesService(map);
+    infoWindow = new google.maps.InfoWindow;
 
-        //#<!-- 自選座標 -->
-        map.addListener('click', function (e) {
-            $('#places').empty();
-            //alert(e.latLng);
-            let lat = e.latLng.lat();
-            let lng = e.latLng.lng();
-            pyrmont = { lat: lat, lng: lng };
-            service.nearbySearch(
-                { location: pyrmont, radius: 300, type: ['store'] },
-                function (results, status, pagination) {
-                    if (status !== 'OK') return;
-                    createMarkers(results);
-                    //console.log(results);
-                });
-            function createMarkers(places) {
-                var bounds = new google.maps.LatLngBounds();
-                var placesList = document.getElementById('places');
-                //console.log(placesList);
-                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=<%= Figaro.env.google_api_key %>`)
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (data) {
-                        //console.log(data);
-                        //縣市、區域、地址、座標
-                        //adress
-                        //$('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
-                        address = data.results[0].formatted_address;
-                        //address_contury = data.results[0].address_components[3].long_name;
-                        //address_area = data.results[0].address_components[2].long_name;
-                        //console.log(address_contury);
-                        //console.log(address_area);
-                        placeMarkerAndPanTo(e.latLng, map);
-                        //市+區
-                        //$('#contury_area').empty().append(`<div>${address_contury}</div><div>${address_area}</div>`);
+    //#<!-- 自選座標 -->
+    map.addListener('click', function (e) {
+      $('#places').empty();
+      //alert(e.latLng);
+      let lat = e.latLng.lat();
+      let lng = e.latLng.lng();
+      pyrmont = { lat: lat, lng: lng };
+      service.nearbySearch(
+        { location: pyrmont, radius: 300, type: ['store'] },
+        function (results, status, pagination) {
+          if (status !== 'OK') return;
+          createMarkers(results);
+          //console.log(results);
+        });
+      function createMarkers(places) {
+        var bounds = new google.maps.LatLngBounds();
+        var placesList = document.getElementById('places');
+        //console.log(placesList);
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=<%= Figaro.env.google_api_key %>`)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            //console.log(data);
+            //縣市、區域、地址、座標
+            //adress
+            //$('.sidebar').append(`<div>${data.results[0].formatted_address}</div>`);
+            address = data.results[0].formatted_address;
+            //address_contury = data.results[0].address_components[3].long_name;
+            //address_area = data.results[0].address_components[2].long_name;
+            //console.log(address_contury);
+            //console.log(address_area);
+            placeMarkerAndPanTo(e.latLng, map);
+            //市+區
+            //$('#contury_area').empty().append(`<div>${address_contury}</div><div>${address_area}</div>`);
 
-                        //alert(address);
-                    })
-                    .catch(function (error) {
-                        alert('some bad thing happend')
-                        alert(error)
-                    })
+            //alert(address);
+          })
+          .catch(function (error) {
+            alert('some bad thing happend')
+            alert(error)
+          })
 
-                console.log(places);
-                for (var i = 0, place; place = places[i]; i++) {
-                    var image = {
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
+        console.log(places);
+        for (var i = 0, place; place = places[i]; i++) {
+          var image = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
 
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        icon: image,
-                        title: place.name,
-                        position: place.geometry.location
-                    });
+          var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            title: place.name,
+            position: place.geometry.location
+          });
 
-                    //var geoAddress;
-                    // geocoder.geocode({ 'placeId': place.place_id }, function (results) {
-                    //    geoAddress = JSON.stringify(results[0].formatted_address);
-                    //    console.log(geoAddress);
-                    //});
+          //var geoAddress;
+          // geocoder.geocode({ 'placeId': place.place_id }, function (results) {
+          //    geoAddress = JSON.stringify(results[0].formatted_address);
+          //    console.log(geoAddress);
+          //});
 
           $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }) + `>${place.name}</button>`);
           $('.store-places').animate({ width: "200px" }, 200);
@@ -120,6 +121,7 @@
       let selectpoint = $(this).text();
       //alert(`你選了『${selectpoint}』`);
       $(this).addClass('infocus');
+      $('.choose').text(selectpoint);
       //e.preventDefult
       //console.log('aaa')
       //console.log('!')

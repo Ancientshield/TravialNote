@@ -20,10 +20,11 @@
     }
 
     .btn {
-      border: 1px solid #000;
+      border: 1px solid #ccc;
       border-radius: 4px;
       width: 100%;
       height: 30px;
+      color: #333;
     }
   }
 }
@@ -37,11 +38,14 @@
 
 .form-date{
   margin-bottom: 30px;
-
+  display: flex;
+  flex-flow: nowrap;
 }
 .form-date:before{
   content: '選擇日期';
-  display: inline-block;
+  color: #333;
+  margin-right: 10px;
+  line-height: 30px;
 }
 
 .form-location{

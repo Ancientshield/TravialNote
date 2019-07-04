@@ -2,16 +2,15 @@
     /* Always set the map height explicitly to define the size of the div
            * element that contains the map. */
     #map {
-        height: 100%;
-        width: 600px;
+        width: 100%;
         height: 400px;
         border-radius: 2px;
         box-shadow: 1px 1px 3px #333;
 
     }
 
-    .infocus {
-        background-color: #999;
+    button:focus {
+        background-color: rgb(211, 204, 204);
     }
 
     .store-places {
@@ -25,7 +24,6 @@
         margin: 10px;
         height: auto;
         padding: 10px 0;
-
     }
 
     .store-places:hover {
@@ -52,12 +50,20 @@
 <script type="text/javascript">
     var map, infoWindow, address, address_contury, address_area;
     function initMap() {
-        console.log('initMap')
-        let pyrmont = { lat: 25.04, lng: 121.51 };
         map = new google.maps.Map(document.getElementById('map'), {
-            center: pyrmont,
-            zoom: 14
+            zoom: 16,
         });
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+        });
+
+
+        var geocoder = new google.maps.Geocoder();
 
         let service = new google.maps.places.PlacesService(map);
         infoWindow = new google.maps.InfoWindow;
@@ -80,7 +86,7 @@
                 var bounds = new google.maps.LatLngBounds();
                 var placesList = document.getElementById('places');
                 //console.log(placesList);
-                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=AIzaSyDdfhhffGo6wHQs3NrMK_oyI1snX-6DTd0`)
+                fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&language=zh-TW&key=<%= Figaro.env.google_api_key %>`)
                     .then(function (response) {
                         return response.json();
                     })
@@ -105,6 +111,7 @@
                         alert(error)
                     })
 
+                console.log(places);
                 for (var i = 0, place; place = places[i]; i++) {
                     var image = {
                         url: place.icon,
@@ -121,9 +128,17 @@
                         position: place.geometry.location
                     });
 
-                    //$('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`); -->
-                    $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id }) + `>${place.name}</button>`);
+                    //var geoAddress;
+                    // geocoder.geocode({ 'placeId': place.place_id }, function (results) {
+                    //    geoAddress = JSON.stringify(results[0].formatted_address);
+                    //    console.log(geoAddress);
+                    //});
+
+                    $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }) + `>${place.name}</button>`);
                     $('.store-places').animate({ width: "200px" }, 200);
+
+
+                    //$('#places').append(`<button type="button" class="store-places" value="${place.place_id}">${place.name}</button>`); -->
                     //$('.sidebar').append(`<p>${e.latLng.lat()},${e.latLng.lng()}</p>`);
                     //ajax
                     //$.get('<%= ajax_path %>', { lat: e.latLng.lat(), lng: e.latLng.lng() });
@@ -165,7 +180,17 @@
 
     $('.new_diary').on('click', function (event) {
         var $this = $(this);
-        console.log('!!0');
+        let aaa = JSON.parse($('.infocus').val());
+        $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
+            var href = $this.attr('href');
+            if (href.length > 0)
+                location.href = href;
+        });
+        return false;
+    });
+
+    $('.new_pocket').on('click', function (event) {
+        var $this = $(this);
         let aaa = JSON.parse($('.infocus').val());
         $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
             var href = $this.attr('href');
@@ -195,6 +220,7 @@
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+
 </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=<%= Figaro.env.google_api_key %>&libraries=places&callback=initMap">

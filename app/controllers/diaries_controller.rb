@@ -43,9 +43,10 @@ class DiariesController < ApplicationController
     @tag_items = []
     @user_tags = current_user.tags
     # @picture = Picture.new(diary_params)
+    @diary.location = session[:location]
 
-
-    if @diary.save 
+    # binding.pry
+    if @diary.save
       unless items.nil?
         items.each do |item|
           current_user.tags.find_or_create_by(label: item)

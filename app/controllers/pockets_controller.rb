@@ -17,12 +17,12 @@ class PocketsController < ApplicationController
   end
 
   def create
-    @pocket = current_user.pocket_lists.new
-    @pocket.location = session[:location]
-    if @pocket.expect_date.nil?
+    @pocket = current_user.pocket_lists.new(location: session[:location])
+    #@pocket.location = session[:location]
+    if params[:pocket_list][:expect_date].blank?
       @pocket.expect_date = DateTime.now
     else
-    @pocket.expect_date = params[:pocket_list][:expect_date]
+      @pocket.expect_date = params[:pocket_list][:expect_date]
     end
     @pocket.description = params[:pocket_list][:description]
     if @pocket.save

@@ -6,7 +6,28 @@ class SettingsController < ApplicationController
   end
 
   def new
-    
+    items = []
+    @tag_items = []
+    @user_tags = current_user.tags
+  end
+  
+  def create
+    items = params[:label]
+    @tag_items = []
+    @user_tags = current_user.tags
+
+    if @diary.save
+      unless items.nil?
+        items.each do |item|
+          current_user.tags.find_or_create_by(label: item)
+          tag_id = current_user.tags.find_by(label: item).id
+          DiaryTag.create(diary_id: @diary.id, tag_id: tag_id)
+        end
+      end
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def create

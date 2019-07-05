@@ -51,7 +51,7 @@
       let lng = e.latLng.lng();
       pyrmont = { lat: lat, lng: lng };
       service.nearbySearch(
-        { location: pyrmont, radius: 50 },
+        { location: pyrmont, radius: 20 },
         function (results, status, pagination) {
           if (status !== 'OK') return;
           createMarkers(results);

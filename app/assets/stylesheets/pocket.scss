@@ -1,0 +1,22 @@
+.pocket-item{
+  width: 100%;
+  display: flex;
+  .name{
+    width: 100%;
+  }
+  .address{
+    width: 100%;
+  }
+  .pocket-date{
+    width: 20%;
+  }
+  .discription{
+    width: 80%;
+  }
+  .pocket-edit{
+    width: 50%;
+  }
+  .pocket-delete{
+    width: 50%;
+  }
+}

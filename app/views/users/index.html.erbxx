@@ -5,10 +5,10 @@
     <section class="main form">
       <div id="map"></div>
       <section class="btn-link map-link">
+        <div class="choose"></div>
         <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
         <%= link_to '加入口袋', new_pocket_path, class:'btn btn-secondary btn-linkto new_pocket' %>
       </section>
-      <div class="choose"></div>
     </section>
     <section class="sidebar map-sidebar">
       <div id="places" class="places"></div>
@@ -101,8 +101,8 @@
           //    geoAddress = JSON.stringify(results[0].formatted_address);
           //    console.log(geoAddress);
           //});
-
-          $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }) + `>${place.name}</button>`);
+          var placeStr = escape(JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }));
+          $('#places').append(`<button type="button" class="store-places" value="${placeStr}">${place.name}</button>`);
           $('.store-places').animate({ width: "200px" }, 200);
 
 
@@ -149,7 +149,6 @@
 
   $('.new_diary').on('click', function (event) {
     var $this = $(this);
-    let aaa = JSON.parse($('.infocus').val());
     $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
       var href = $this.attr('href');
       if (href.length > 0)
@@ -157,7 +156,6 @@
     });
     return false;
   });
-
 
   $('.new_pocket').on('click', function (event) {
     var $this = $(this);
@@ -168,6 +166,10 @@
         location.href = href;
     });
     return false;
+  });
+
+  $(document).ready(function () {
+
   });
 
 
@@ -189,10 +191,9 @@
       'Error: The Geolocation service failed.' :
       'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
-
   }
 
 </script>
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= Figaro.env.google_api_key %>&libraries=places&callback=initMap">
-  </script>
+</script>

@@ -3,6 +3,11 @@
   <%= render 'layouts/nav' %>
   <div class="container">
     <section class="main form">
+      <div class="loader-box">
+        <div class="loader-flex">
+          <div class="loading"></div>
+        </div>
+      </div>
       <div id="map"></div>
       <section class="btn-link map-link">
         <%= link_to '新增日記', new_diary_path, class:'btn btn-secondary btn-linkto new_diary' %>
@@ -28,11 +33,13 @@
         lng: position.coords.longitude
       };
       map.setCenter(pos);
+      // 控制拿到資料之後要多轉的時間
+      $('.loader-box').delay(500).queue(function (next) {
+        $(this).hide();
+      });
     });
 
-
     var geocoder = new google.maps.Geocoder();
-
     let service = new google.maps.places.PlacesService(map);
     infoWindow = new google.maps.InfoWindow;
 

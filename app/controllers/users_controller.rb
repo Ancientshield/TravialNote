@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    session.delete(:location) if session[:location].present?
+    #session.delete(:location) if session[:location].present?
   end
 
   def ajax

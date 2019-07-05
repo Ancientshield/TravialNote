@@ -3,9 +3,8 @@ class DiariesController < ApplicationController
   
   def index
     @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
-
-    @diaries = current_user.diaries.where(is_published: true).order(:diary_date)
     @pockets = current_user.pocket_lists.order(created_at: :asc).limit(3)
+    @diaries = current_user.diaries.with_attached_picture.where(is_published: true).order(:diary_date)
   end
 
   def show

@@ -7,11 +7,13 @@ class PocketsController < ApplicationController
     # asc 升冪 ascending
     @pockets = current_user.pocket_lists.order(created_at: :asc)
     #@pocket = PocketList.where(user_id: params[:id])
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
   end
 
   def new
     @pocket = current_user.pocket_lists.new
     @pocket.location = session[:location]
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
   end
 
   def create
@@ -35,6 +37,7 @@ class PocketsController < ApplicationController
     # 顯示編輯頁
     @pocket = PocketList.find_by(id: params[:id], user_id: current_user.id)
     # @pocket = current_user.pocket_lists.find(params[:id])
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
   end
 
   def update
@@ -49,6 +52,7 @@ class PocketsController < ApplicationController
   def show
     @pockets = PocketList.find_by(user_id: params[:id])
     #@pocket = current_user.pocket_lists.find_by(id: params[:id])
+    @drafts = current_user.diaries.where(is_published: false).order(:diary_date).limit(3)
   end
 
   def destroy

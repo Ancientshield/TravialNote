@@ -3,7 +3,6 @@
 <div class="container">
   <div class="main">
     <h3>加入口袋</h3>
-    <% byebug %>
     <% if @pocket.location.try(:[],'name') %>
     <div><%= @pocket.location.try(:[],'name') %></div>
     <% end %>

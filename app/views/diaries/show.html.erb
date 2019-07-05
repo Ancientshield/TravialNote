@@ -5,7 +5,7 @@
   <div class="container">
     <section class="main">
       <section class="show-diary">
-        <div class="picture"><%= image_tag @diary.picture if @diary.picture.attached? %></div>
+        <div class="picture"><%= image_tag @diary.picture.service_url if @diary.picture.attached? %></div>
         <div class="location">
           <% if @diary.location.try(:[],"name") %>
           <h1><%= @diary.location.try(:[],"name") %></h1>

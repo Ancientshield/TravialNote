@@ -34,7 +34,7 @@
           </div>
 
           <div class="pic">
-            <%= image_tag diary.picture if diary.picture.attached? %>
+            <%= image_tag diary.picture.service_url if diary.picture.attached? %>
           </div>
         </div>
         <% end %>

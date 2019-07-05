@@ -9,6 +9,18 @@ class SettingsController < ApplicationController
     
   end
 
+  def create
+    tag = params[:label]
+    if current_user.tags.find_by(label: tag)
+      redirect_to settings_path, notice:'這個標籤已經存在了喔' 
+    elsif tag.include?(' ') 
+      redirect_to settings_path, notice:''
+    else  
+      current_user.tags.find_or_create_by(label: tag)
+      redirect_to settings_path, notice:'新增成功'
+    end
+  end
+
   def edit
     @setting = current_user.tags.find(params[:id])
   end
@@ -16,7 +28,7 @@ class SettingsController < ApplicationController
   def update
     @setting = current_user.tags.find(params[:id])
     if @setting.update!(setting_params)
-      redirect_to settings_path, notice: "修改口袋成功！"
+      redirect_to settings_path, notice: "修改標籤成功！"
     else
       render :edit
     end

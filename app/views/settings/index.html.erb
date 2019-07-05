@@ -1,32 +1,8 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<style type="text/css">
-  .btn {
-    font-size: 12px;
-  }
-
-  .btn-color {
-    background-color: #000;
-  }
-
-  .table {
-    color: rgb(109, 109, 109);
-  }
-
-  tr {
-    padding-top: 20px;
-  }
-</style>
-
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 
 <div class="container">
-  <%= notice %>
+  
   <table class="table table-hover">
     <thead>
     <p>您目前儲存的標籤</p>
@@ -45,14 +21,26 @@
     <% end %>
       </tbody>
   </table>
-
   <div class="tags NewTag">
-      <input type="text" placeholder="輸入Tag" id="tagInput" class="">
-      <input type="button" value="新增自訂標籤" id="tagBtn" class="btn btn-primary">
+    <%= form_tag("/settings", method: "post") do %>
+      <input type="text" placeholder="輸入Tag" id="tagInput" name="label">
+      <input type="submit" value="新增自訂標籤" id="tagBtn" class="btn btn-primary">
+    <% end %>
+    <%= notice %>
   </div>
     
 </div>
 
-
+<script>
+$(document).ready(function(){
+  $('#tagBtn').on('click',function(){
+    let tagRgx = /\s/
+    var tagInput = $('#tagInput').val()
+    if (tagInput.match(tagRgx)){
+      alert('標籤不能有空白字元喔')
+    }
+  })
+})
+</script>
     
     

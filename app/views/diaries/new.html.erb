@@ -106,6 +106,7 @@ $(document).ready(function(){
   })
 
 
+
   // init origin tags data
   var originTags;
   var originUserTags;
@@ -140,13 +141,17 @@ $(document).ready(function(){
   })
 
   $('#tagBtn').on('click',function(){
+    let tagRgx = /\s/
     var tagInput = $('#tagInput').val()
-    var tagSpan = "<span class='tag-item'>"+ tagInput +"</span>"
-    $('.TagItems').append(tagSpan)
-    createHiddenInput(tagInput)
-    $('#tagInput').val('')
+    if (tagInput.match(tagRgx)){
+      alert('標籤不能有空白字元喔')
+    }else{
+      var tagSpan = "<span class='tag-item'>"+ tagInput +"</span>"
+      $('.TagItems').append(tagSpan)
+      createHiddenInput(tagInput)
+      $('#tagInput').val('')
+    }
   })
-
 
 
 function createHiddenInput(item){

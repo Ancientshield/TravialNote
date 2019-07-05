@@ -102,3 +102,38 @@
   }
 }
 
+.NewTag.setting{
+  input{
+    margin-top: 10px;
+  }
+  margin-top: 0;
+  &:before{
+    display: none;
+  }
+}
+.setting-tag-content{
+  width: 100%;
+  .items{
+    margin-bottom: 5px;
+    height: 50px;
+    padding: 0 10px;
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    .tag-item{
+      margin-bottom: 0px;
+      margin-right: auto;
+    }
+    .item-edit{
+      margin-right: 10px;
+    }
+    .item-edit, .item-delete{
+      background-color: #fefefe;
+    }
+  }
+  .items:hover{
+    background-color: #eee;
+  }
+  
+}

@@ -158,6 +158,7 @@
     return false;
   });
 
+
   $('.new_pocket').on('click', function (event) {
     var $this = $(this);
     let aaa = JSON.parse($('.infocus').val());
@@ -188,6 +189,7 @@
       'Error: The Geolocation service failed.' :
       'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
+
   }
 
 </script>

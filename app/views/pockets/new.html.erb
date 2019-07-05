@@ -1,17 +1,19 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
+<div class="main">
   <h3>加入口袋</h3>
   <% if @pocket.location.try(:[],'name') %>
-  <div><%= @pocket.location.try(:[],'name') %></div>
+    <div><%= @pocket.location.try(:[],'name') %></div>
   <% end %>
   <% if @pocket.location.try(:[],'address') %>
-  <div><%= @pocket.location.try(:[],'address') %></div>
+    <div><%= @pocket.location.try(:[],'address') %></div>
   <% end %>
   <%= simple_form_for(@pocket, method: :post, url: pockets_path) do |f| %>
-  <div><%= f.input :expect_date, as: :date, html5: true, label: '預計拜訪時間：' %></div>
-  <div><%= f.input :description, label:'描述：', placeholder: '加點喜歡的描述吧' %></div>
-  <div><%= f.submit '儲存' %></div>
+    <div><%= f.input :expect_date, as: :date, html5: true, label: '預計拜訪時間：' %></div>
+    <div><%= f.input :description, label:'描述：', placeholder: '加點喜歡的描述吧' %></div>
+    <div><%= f.submit '儲存' %></div>
   <% end %>
-  <% end %>
+</div>
+<div class="sidebar"></div>
 </div>

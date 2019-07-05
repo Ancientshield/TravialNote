@@ -27,10 +27,15 @@ class SettingsController < ApplicationController
 
   def update
     @setting = current_user.tags.find(params[:id])
-    if @setting.update!(setting_params)
-      redirect_to settings_path, notice: "修改標籤成功！"
+    check = current_user.tags.find_by(label: params[:tag][:label])
+    if check.nil?
+      if @setting.update!(setting_params)
+        redirect_to settings_path, notice: "修改標籤成功！"
+      else
+        render :edit
+      end
     else
-      render :edit
+      render :edit, notice: "已存在相同的標籤名稱"
     end
   end
 

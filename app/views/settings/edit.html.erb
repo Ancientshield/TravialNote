@@ -1,3 +1,4 @@
+<div class="diarywrap">
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
@@ -5,9 +6,16 @@
   <section class="main">
 
     <h3>編輯您的標籤名稱</h3>
-    <%= simple_form_for(@setting, url: "#{setting_path}/#{@section}") do |f| %>
-    <div><%= f.input :label, label:'標籤：' %></div>
-    <div><%= f.submit '儲存' %></div>
-    <% end %>
+    <div class="tags NewTag">
+      <%= simple_form_for(@setting, url: "#{setting_path}/#{@section}") do |f| %>
+        <span>您目前的標籤名稱： <%= @setting.label %></span>
+        <%= f.input :label, label:'更改標籤名稱為：' %>
+        <div class="btn-link">
+          <%= f.submit '儲存' ,class:'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </section>
+  <section class="sidebar"></section>
+</div>
 </div>

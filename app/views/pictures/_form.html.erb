@@ -1,17 +1,16 @@
 <%= form_with(model: picture, local: true) do |form| %>
-  
 
-  <div class="field">
-    <%= form.label :cover %>
-    <%= form.file_field :cover %>
-  </div>
+<div class="field">
+  <%= form.label :cover %>
+  <%= form.file_field :cover %>
+</div>
 
-  <div class="field">
+<div class="field">
   <%= form.label :banners %>
   <%= form.file_field :banners, multiple: true %>
-  </div>
+</div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<div class="actions">
+  <%= form.submit %>
+</div>
 <% end %>

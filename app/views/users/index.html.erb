@@ -102,7 +102,8 @@
           //    console.log(geoAddress);
           //});
 
-          $('#places').append(`<button type="button" class="store-places" value=` + JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }) + `>${place.name}</button>`);
+          var placeStr = escape(JSON.stringify({ "name": place.name, "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng(), "place_id": place.place_id, "address": place.vicinity }));
+          $('#places').append(`<button type="button" class="store-places" value="${placeStr}">${place.name}</button>`);
           $('.store-places').animate({ width: "200px" }, 200);
 
 
@@ -149,7 +150,7 @@
 
   $('.new_diary').on('click', function (event) {
     var $this = $(this);
-    let aaa = JSON.parse($('.infocus').val());
+    let aaa = JSON.parse(unescape($('.infocus').val()));
     $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
       var href = $this.attr('href');
       if (href.length > 0)
@@ -161,7 +162,7 @@
 
   $('.new_pocket').on('click', function (event) {
     var $this = $(this);
-    let aaa = JSON.parse($('.infocus').val());
+    let aaa = JSON.parse(unescape($('.infocus').val()));
     $.get('<%= set_map_session_diaries_path %>', { location: aaa }, function (rs) {
       var href = $this.attr('href');
       if (href.length > 0)

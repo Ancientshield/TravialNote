@@ -1,22 +1,53 @@
-.pocket-item{
+.pocket-items {
+  font-size: 14px;
   width: 100%;
-  display: flex;
-  .name{
+  table {
+    border-collapse: collapse;
     width: 100%;
+  }
+  thead td{
+    text-align: center;
+  }
+  tr{
+    height: 50px;
+  }
+  td{
+    color: #333;
+  }
+
+  .pocket-date{
+    width: 72px;
+  }
+  .name{
+    width: 20%;
   }
   .address{
-    width: 100%;
-  }
-  .pocket-date{
     width: 20%;
   }
   .discription{
-    width: 80%;
+    width: 20%;
   }
   .pocket-edit{
-    width: 50%;
+    width: 53px;
   }
   .pocket-delete{
-    width: 50%;
+    width: 53px;
+  }
+}
+
+
+.pocket.main{
+  color: #333;
+  form input{
+    margin: 10px 0;
+    padding-left: 8px;
+    line-height: 26px;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width:375px){
+  .pocket.main{
+    padding: 50px 0 0 50px;
   }
 }

@@ -98,7 +98,7 @@
 }
 .SearchTags{
   a{
-    margin: 5px 2px;
+    margin: 10px 2px;
   }
 }
 
@@ -121,6 +121,8 @@
     flex-flow: nowrap;
     justify-content: flex-end;
     align-items: center;
+    box-shadow: none;
+    border-bottom: 1px #ccc solid;
     .tag-item{
       margin-bottom: 0px;
       margin-right: auto;

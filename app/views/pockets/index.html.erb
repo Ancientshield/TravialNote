@@ -2,38 +2,31 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <div class="container">
-  <section class="main">
-    <div class="pocket-items">
-      <div class="pocket-item">
-        <div class="name">地點</div><div class="address">地址</div><div class="pocket-date">時間</div><div class="description">描述</div><div class="pocket-edit"></div><div class="pocket-delete"></div>
-      </div>
-      <% @pockets.each do |pocket| %>
-        <div class="pocket-item">
-        <div class="name"><% if pocket.location.try(:[],'name') %><%= pocket.location.try(:[],'name') %>
-        <% end %>
-        </div>
-        
-        <div class="address">
-        <% if pocket.location.try(:[],'address') %>
-        <%= pocket.location.try(:[],'address') %>
-        <% end %>
-        </div>
-        <div class="pocket-date">
-        <%= "#{pocket.expect_date.year}-#{pocket.expect_date.month}-#{pocket.expect_date.day}" %>
-        </div>
-        <div class="description"><%= pocket.description %></div>
-        <div class="pocket-edit"><%= link_to '編輯', edit_pocket_path(pocket), class:"btn btn-outline-secondary btn-linkto" %>
-        </div>
-        <div class="pocket-delete">
-        <%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"btn btn-outline-secondary btn-linkto" %>
-        </div>
-      </div>
-      <% end %>
-    </tbody>
-  </table>
-</section>
-<section class="sidebar">
-  <%= render 'layouts/sidedraft' %>
-</section>
+
+<table class="pocket-items">
+  <thead>
+    <tr>
+      <td class="pocket-date">時間</td>
+      <td class="name">地點</td>
+      <td class="address">地址</td>
+      <td class="description">描述</td>
+      <td class="pocket-edit"></td>
+      <td class="pocket-delete"></td>
+  </tr>
+  </thead>
+  <tbody>
+    <% @pockets.each do |pocket| %>
+    <tr>
+      <td class="pocket-date"><%= "#{pocket.expect_date.year}-#{pocket.expect_date.month}-#{pocket.expect_date.day}" %></td>
+      <td class="name"><%= pocket.location.try(:[],'name') if pocket.location.try(:[],'name') %></td>
+      <td class="address"><%= pocket.location.try(:[],'address') if pocket.location.try(:[],'address') %></td>
+      <td class="description"><%= pocket.description %></td>
+      <td class="pocket-edit"><%= link_to '編輯', edit_pocket_path(pocket), class:"pocket-edit btn btn-primary" %></td>
+      <td class="pocket-delete"><%= link_to '刪除', pocket_path(pocket), method: "delete", data: { confirm: "確認刪除？" }, class:"pocket-delete btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 </div>
 </div>

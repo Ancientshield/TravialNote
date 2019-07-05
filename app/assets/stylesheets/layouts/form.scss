@@ -68,7 +68,28 @@
   padding-top: 10px;
 }
 
-
+.form-search{
+  input{
+    line-height: 26px;
+    padding: 3px 10px;
+  }
+  #search{
+    width: 250px;
+  }
+}
+.edit_tag{
+  color: #333;
+  span{
+    line-height: 26px;
+  }
+  div.input{
+    margin:20px 0;
+    input{
+      font-size: 18px;
+    }
+  }
+  
+}
 
 @media screen and (min-width:415px){
   .main.form{

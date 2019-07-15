@@ -1,23 +1,30 @@
-# GogoDiary
+# GoGoDiary
 
-This TravialNote is 5xRuby demo project that show members learning programing design in three month last.
+- GoGoDiary致力於解決記錄的問題，搭配地圖資訊、標籤功能，幫您記住生活的點點滴滴。
 
+- 地圖探索：提供巷弄間的美食資訊、周遭景點
 
+- 口袋清單：記錄下次要拜訪的地方，讓你不健忘
 
-update early
+- 草稿清單：尚未編輯完成的日記，一目瞭然
 
-* Ruby version
+- 標籤系統：幫日記做分類，找尋記憶更方便
 
-* System dependencies
+----
 
-* Configuration
+## 網站開發技術：
 
-* Database creation
+- 前端：
+  - HTML
+  - CSS
+  - jQuery
+  - JavaScript
 
-* Database initialization
+- 後端：
+  - Ruby version：2.6.0
+  - Rails version：5.2.3
+  - Database：PostgreSQL 11.3
 
-* How to run the test suite
+- ER-Model
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+   ![Alt text](lib/assets/ERModel.png)

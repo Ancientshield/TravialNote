@@ -28,3 +28,5 @@
 - ER-Model
 
    ![Alt text](lib/assets/ERModel.png)
+
+- 網站圖片來源取自 [https://whvn.cc/lqmo92](https://whvn.cc/lqmo92)，僅使用於網站開發作品練習，不做為商業用途。

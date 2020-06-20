@@ -34,3 +34,4 @@
 /config/application.yml
 /config/secerts/add_imgs.json
 /config/database.yml
+/heroku
